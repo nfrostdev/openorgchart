@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="column">
-        <p class="content has-text-centered">Employees make your institution run.</p>
+        <p class="content has-text-centered">Employees make your institution function.</p>
         @if($employees->count())
             @component('components.table')
                 @slot('headers', ['ID', 'Name', 'Title', 'Team', 'Created', 'Last Updated'])
