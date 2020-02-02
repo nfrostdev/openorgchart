@@ -3,9 +3,8 @@
 @section('title', 'Login')
 
 @section('content')
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('login') }}" class="column is-one-quarter" onsubmit="document.getElementById('submit-button').classList.add('is-loading')">
         @csrf
-
         @component('components.form-input')
             @slot('id', 'email')
             @slot('label', 'E-Mail Address')
@@ -33,13 +32,15 @@
             </div>
         </div>
 
-        <div class="control buttons">
-            <button type="submit" class="button is-primary is-rounded">Login</button>
-            @if (Route::has('password.request'))
-                <a class="button is-link is-outlined is-small is-rounded" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
-                </a>
-            @endif
+        <div class="field is-grouped">
+            <div class="control buttons">
+                <button type="submit" id="submit-button" class="button is-primary is-rounded">Login</button>
+                @if (Route::has('password.request'))
+                    <a class="button is-link is-outlined is-small is-rounded" href="{{ route('password.request') }}">
+                        {{ __('Forgot Your Password?') }}
+                    </a>
+                @endif
+            </div>
         </div>
     </form>
 @endsection

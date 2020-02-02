@@ -67,9 +67,13 @@
     </nav>
 </header>
 
-<main class="container">
-    <h1 class="title is-3">@yield('title')</h1>
-    @yield('content')
+<main class="section">
+    <div class="container">
+        <h1 class="title is-3 has-text-centered">@yield('title')</h1>
+        <div class="columns is-centered">
+            @yield('content')
+        </div>
+    </div>
 </main>
 
 </body>
