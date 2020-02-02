@@ -5,7 +5,7 @@
 @section('content')
     <form method="POST" action="{{ route('login') }}" class="column is-one-quarter" onsubmit="document.getElementById('submit-button').classList.add('is-loading')">
         @csrf
-        @component('components.form-input')
+        @component('components.input')
             @slot('id', 'email')
             @slot('label', 'E-Mail Address')
             @slot('type', 'email')
@@ -14,7 +14,7 @@
             @slot('icon', 'fa-envelope')
         @endcomponent
 
-        @component('components.form-input')
+        @component('components.input')
             @slot('id', 'password')
             @slot('label', 'Password')
             @slot('type', 'password')
@@ -32,11 +32,16 @@
             </div>
         </div>
 
-        <div class="field is-grouped">
-            <div class="control buttons">
-                <button type="submit" id="submit-button" class="button is-primary is-rounded">Login</button>
+        <div class="field">
+            <div class="control">
+                <button type="submit" id="submit-button" class="button is-fullwidth is-primary is-rounded">Login</button>
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
                 @if (Route::has('password.request'))
-                    <a class="button is-link is-outlined is-small is-rounded" href="{{ route('password.request') }}">
+                    <a class="is-block has-text-centered has-text-weight-light is-size-7" href="{{ route('password.request') }}">
                         {{ __('Forgot Your Password?') }}
                     </a>
                 @endif
