@@ -14,6 +14,16 @@ class DatabaseSeeder extends Seeder
         factory(\App\User::class, 24)->create();
         factory(\App\Department::class, 10)->create();
         factory(\App\Team::class, 50)->create();
-        factory(\App\Employee::class, 250)->create();
+        factory(\App\Employee::class, 250)->create()->each(function ($employee) {
+            // 1 in 10 employees may not have a supervisor.
+            if (rand(1, 10) !== 10) {
+                $employee->update([
+                    'supervisor_id' => \App\Employee::all()
+                        ->where('id', '!=', $employee->id)
+                        ->random()
+                        ->id
+                ]);
+            }
+        });
     }
 }
