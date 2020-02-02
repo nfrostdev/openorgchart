@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
-        //
+        return view('departments.index', ['departments' => Department::paginate(25)]);
     }
 
     /**
@@ -30,7 +31,7 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +42,7 @@ class DepartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Department  $department
+     * @param \App\Department $department
      * @return \Illuminate\Http\Response
      */
     public function show(Department $department)
@@ -52,7 +53,7 @@ class DepartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Department  $department
+     * @param \App\Department $department
      * @return \Illuminate\Http\Response
      */
     public function edit(Department $department)
@@ -63,8 +64,8 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Department  $department
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Department $department
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Department $department)
@@ -75,7 +76,7 @@ class DepartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Department  $department
+     * @param \App\Department $department
      * @return \Illuminate\Http\Response
      */
     public function destroy(Department $department)
