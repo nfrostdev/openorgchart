@@ -17,5 +17,8 @@ Auth::routes([
     'confirm' => false
 ]);
 
-Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+});
+
 Route::get('/', 'HomeController@index')->name('index');
