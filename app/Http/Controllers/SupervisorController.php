@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Employee;
+use App\Supervisor;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
-class EmployeeController extends Controller
+class SupervisorController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('employees.index', ['employees' => Employee::paginate(10)]);
+        //
     }
 
     /**
@@ -42,10 +41,10 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param  \App\Supervisor  $supervisor
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show(Supervisor $supervisor)
     {
         //
     }
@@ -53,10 +52,10 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param  \App\Supervisor  $supervisor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Supervisor $supervisor)
     {
         //
     }
@@ -65,10 +64,10 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
+     * @param  \App\Supervisor  $supervisor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, Supervisor $supervisor)
     {
         //
     }
@@ -76,10 +75,10 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employee  $employee
+     * @param  \App\Supervisor  $supervisor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Supervisor $supervisor)
     {
         //
     }

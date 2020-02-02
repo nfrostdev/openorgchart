@@ -12,4 +12,9 @@ class Team extends Model
     {
         return $this->belongsTo('App\Department');
     }
+
+    public function employees()
+    {
+        return $this->hasMany('App\Employee');
+    }
 }
