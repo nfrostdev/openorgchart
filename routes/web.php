@@ -18,10 +18,11 @@ Auth::routes([
 ]);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+    Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::resource('departments', 'DepartmentController');
     Route::resource('teams', 'TeamController');
     Route::resource('employees', 'EmployeeController');
+    Route::resource('users', 'UserController');
 });
 
 Route::get('/', 'HomeController@index')->name('index');

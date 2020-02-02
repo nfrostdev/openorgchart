@@ -37,6 +37,7 @@
                         @endif
                     @else
                         <a class="navbar-item" href="{{ route('dashboard') }}">Dashboard</a>
+                        <a class="navbar-item" href="{{ route('users.index') }}">Users</a>
                         <a class="navbar-item" href="{{ route('departments.index') }}">Departments</a>
                         <a class="navbar-item" href="{{ route('teams.index') }}">Teams</a>
                         <a class="navbar-item" href="{{ route('employees.index') }}">Employees</a>
