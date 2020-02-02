@@ -15,59 +15,65 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
-<header class="container">
-    <nav class="navbar" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item subtitle" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+<header>
+    <nav class="navbar is-light" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
 
-            <a role="button" id="primary-burger" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-        <div id="primary-menu" class="navbar-menu">
-            <div class="navbar-end">
-                @guest
-                    <a class="navbar-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+                @auth
+                    <div class="navbar-item is-size-7 has-text-weight-light">
+                        <div class="icon">
+                            <span class="fas fa-user-circle"></span>
+                        </div>
+                        <div>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
+                    </div>
+                @endauth
 
-                    @if (Route::has('register'))
-                        <a class="navbar-item" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    @endif
-                @else
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            {{ Auth::user()->email }}
-                        </a>
+                <a role="button" id="primary-burger" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="primary-menu" class="navbar-menu">
+                <div class="navbar-end">
+                    @guest
+                        <a class="navbar-item" href="{{ route('login') }}">{{ __('Login') }}</a>
 
-                        <div class="navbar-dropdown">
+                        @if (Route::has('register'))
+                            <a class="navbar-item" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        @endif
+                    @else
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-item" href="{{ route('dashboard') }}">Dashboard</a>
                             <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
                         </div>
-                    </div>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                @endguest
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    @endguest
+                </div>
             </div>
+            <script>
+                const burger = document.getElementById('primary-burger');
+                const menu = document.getElementById('primary-menu');
+
+                function togglePrimaryMenu() {
+                    burger.classList.toggle('is-active');
+                    burger.setAttribute('aria-expanded', burger.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+                    menu.classList.toggle('is-active');
+                }
+
+                burger.addEventListener('click', togglePrimaryMenu);
+
+                function showSubmitButtonLoading() {
+                    document.getElementById('submit-button').classList.add('is-loading')
+                }
+            </script>
         </div>
-        <script>
-            const burger = document.getElementById('primary-burger');
-            const menu = document.getElementById('primary-menu');
-
-            function togglePrimaryMenu() {
-                burger.classList.toggle('is-active');
-                burger.setAttribute('aria-expanded', burger.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
-                menu.classList.toggle('is-active');
-            }
-
-            burger.addEventListener('click', togglePrimaryMenu);
-
-            function showSubmitButtonLoading() {
-                document.getElementById('submit-button').classList.add('is-loading')
-            }
-        </script>
     </nav>
 </header>
 
