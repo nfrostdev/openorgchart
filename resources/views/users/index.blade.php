@@ -3,8 +3,9 @@
 @section('title', 'Users')
 
 @section('content')
-    @if($users->count())
-        <div class="column">
+    <div class="column">
+        <p class="content has-text-centered">Users have an account for this application and are allowed to modify content.</p>
+        @if($users->count())
             @component('components.table')
                 @slot('headers', ['ID', 'Name', 'E-mail', 'Created', 'Last Updated'])
                 @foreach($users as $user)
@@ -18,6 +19,6 @@
                 @endforeach
             @endcomponent
             {{ $users->links() }}
-        </div>
-    @endif
+        @endif
+    </div>
 @endsection
