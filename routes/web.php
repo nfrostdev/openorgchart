@@ -17,4 +17,5 @@ Auth::routes([
     'confirm' => false
 ]);
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::get('/', 'HomeController@index')->name('index');

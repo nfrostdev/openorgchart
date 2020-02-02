@@ -3,13 +3,16 @@
 @section('title', 'Reset Password')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-    @endif
-    <form method="POST" class="column is-one-quarter" action="{{ route('password.email') }}">
+    <form method="POST" class="column is-one-quarter" action="{{ route('password.email') }}" onsubmit="showSubmitButtonLoading()">
         @csrf
+
+        @if (session('status'))
+            <div class="message is-success" role="alert">
+                <div class="message-body is-size-7">
+                    {{ session('status') }}
+                </div>
+            </div>
+        @endif
 
         @component('components.input')
             @slot('id', 'email')
@@ -19,6 +22,7 @@
             @slot('autocomplete', 'email')
             @slot('icon', 'fa-envelope')
         @endcomponent
+
         <button type="submit" id="submit-button" class="button is-warning is-fullwidth is-rounded">Send Password Reset Link</button>
     </form>
 @endsection

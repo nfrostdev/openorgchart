@@ -5,7 +5,7 @@
                type="{{ $type }}"
                class="input @error($id) is-invalid @enderror"
                name="{{ $id }}"
-               value="{{ old($id) }}"
+               value="{{ isset($value) ? $value : old($id) }}"
                @if(isset($required) && $required) required @endif
                autocomplete="{{ $autocomplete }}"/>
         @if(isset($icon))

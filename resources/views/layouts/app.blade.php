@@ -63,6 +63,10 @@
             }
 
             burger.addEventListener('click', togglePrimaryMenu);
+
+            function showSubmitButtonLoading() {
+                document.getElementById('submit-button').classList.add('is-loading')
+            }
         </script>
     </nav>
 </header>

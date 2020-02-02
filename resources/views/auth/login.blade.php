@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-    <form method="POST" action="{{ route('login') }}" class="column is-one-quarter" onsubmit="document.getElementById('submit-button').classList.add('is-loading')">
+    <form method="POST" action="{{ route('login') }}" class="column is-one-quarter" onsubmit="showSubmitButtonLoading()">
         @csrf
         @component('components.input')
             @slot('id', 'email')
