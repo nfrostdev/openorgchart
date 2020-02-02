@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use App\User;
 
 class CreateUsersTable extends Migration
 {
@@ -23,6 +25,14 @@ class CreateUsersTable extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
+
+        // Create the default administration user.
+        User::create([
+            'first_name' => 'Default',
+            'last_name' => 'Administrator',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('openorgchart'),
+        ]);
     }
 
     /**
