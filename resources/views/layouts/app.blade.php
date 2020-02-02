@@ -21,15 +21,6 @@
             <div class="navbar-brand">
                 <a class="navbar-item" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
 
-                @auth
-                    <div class="navbar-item is-size-7 has-text-weight-light">
-                        <div class="icon">
-                            <span class="fas fa-user-circle"></span>
-                        </div>
-                        <div>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
-                    </div>
-                @endauth
-
                 <a role="button" id="primary-burger" class="navbar-burger" aria-label="menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -75,6 +66,18 @@
             </script>
         </div>
     </nav>
+    @auth
+        <div class="container">
+            <div class="box content is-small is-shadowless">
+                <div class="level-item has-text-link">
+                    <span class="icon">
+                        <span class="fas fa-user-circle"></span>
+                    </span>
+                    <span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                </div>
+            </div>
+        </div>
+    @endauth
 </header>
 
 <main class="section">
