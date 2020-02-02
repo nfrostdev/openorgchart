@@ -15,72 +15,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar is-light" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
 
-                <a role="button" id="primary-burger" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div id="primary-menu" class="navbar-menu">
-                <div class="navbar-end">
-                    @guest
-                        <a class="navbar-item" href="{{ route('login') }}">{{ __('Login') }}</a>
-
-                        @if (Route::has('register'))
-                            <a class="navbar-item" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        @endif
-                    @else
-                        <a class="navbar-item" href="{{ route('dashboard') }}">Dashboard</a>
-                        <a class="navbar-item" href="{{ route('users.index') }}">Users</a>
-                        <a class="navbar-item" href="{{ route('departments.index') }}">Departments</a>
-                        <a class="navbar-item" href="{{ route('teams.index') }}">Teams</a>
-                        <a class="navbar-item" href="{{ route('employees.index') }}">Employees</a>
-                        <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    @endguest
-                </div>
-            </div>
-            <script>
-                const burger = document.getElementById('primary-burger');
-                const menu = document.getElementById('primary-menu');
-
-                function togglePrimaryMenu() {
-                    burger.classList.toggle('is-active');
-                    burger.setAttribute('aria-expanded', burger.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
-                    menu.classList.toggle('is-active');
-                }
-
-                burger.addEventListener('click', togglePrimaryMenu);
-
-                function showSubmitButtonLoading() {
-                    document.getElementById('submit-button').classList.add('is-loading')
-                }
-            </script>
-        </div>
-    </nav>
-    @auth
-        <div class="container">
-            <div class="box content is-small is-shadowless">
-                <div class="level-item has-text-link">
-                    <span class="icon">
-                        <span class="fas fa-user-circle"></span>
-                    </span>
-                    <span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
-                </div>
-            </div>
-        </div>
-    @endauth
-</header>
+@include('layouts.header')
 
 <main class="section">
     <div class="container">
