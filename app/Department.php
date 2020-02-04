@@ -12,4 +12,9 @@ class Department extends Model
     {
         return $this->hasMany('App\Team');
     }
+
+    public function leader()
+    {
+        return $this->hasOne('App\Employee', 'id', 'leader_id');
+    }
 }

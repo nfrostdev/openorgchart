@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $fillable = ['team_id', 'supervisor_id', 'first_name', 'last_name', 'title'];
+    protected $fillable = ['team_id', 'supervisor_id', 'first_name', 'last_name', 'title', 'rank'];
 
     public function team()
     {
@@ -16,5 +16,10 @@ class Employee extends Model
     public function supervisor()
     {
         return $this->hasOne('App\Employee', 'id', 'supervisor_id');
+    }
+
+    public function employees()
+    {
+        return $this->hasMany('App\Employee', 'supervisor_id', 'id');
     }
 }

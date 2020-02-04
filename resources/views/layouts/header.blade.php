@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar is-light" aria-label="main navigation">
+    <nav class="navbar card" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
@@ -82,7 +82,7 @@
     </nav>
     @auth
         <div class="container">
-            <div class="box content is-small is-shadowless">
+            <div class="box content is-small is-shadowless has-background-light">
                 <div class="level-item has-text-link">
                     <span class="icon">
                         <span class="fas fa-user-circle"></span>

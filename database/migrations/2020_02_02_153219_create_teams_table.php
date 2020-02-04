@@ -18,6 +18,7 @@ class CreateTeamsTable extends Migration
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->string('name');
+            $table->unsignedBigInteger('leader_id')->nullable();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
