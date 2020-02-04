@@ -12,12 +12,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(\App\User::class, 24)->create();
-        factory(\App\Department::class, 5)->create()->each(function ($department) {
-            factory(\App\Team::class, rand(1, 3))->create([
+        factory(\App\Department::class, 7)->create()->each(function ($department) {
+            factory(\App\Team::class, rand(1, 5))->create([
                 'department_id' => $department->id,
             ]);
         });
-        factory(\App\Employee::class, 50)->create();
+        factory(\App\Employee::class, 100)->create();
 
         // Assign department and team leaders after employees are seeded.
         \App\Department::all()->each(function ($department) {

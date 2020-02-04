@@ -50,6 +50,10 @@
 <style>
     .org-chart-employee {
         position: relative;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .org-chart-employee-pointer {
@@ -66,7 +70,6 @@
 
     .org-chart-group {
         display: grid;
-        align-items: start;
-        grid-gap: 0 0.5rem;
+        grid-gap: 0 1.5rem;
     }
 </style>
