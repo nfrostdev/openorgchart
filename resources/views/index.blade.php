@@ -6,45 +6,48 @@
     <h2 class="has-text-centered title is-3">{{ $department->name }}</h2>
 
     @if(isset($department->leader) && $department->leader)
-        <div class="org-chart-team">
-            <h3 class="has-text-centered title is-4">{{ $department->name }} Overview</h3>
-            @component('components.employee-iterator')
-                @slot('employee', $department->leader)
-                @slot('leader', true)
-            @endcomponent
-        </div>
+        @component('components.employee')
+            @slot('employee', $department->leader)
+            @slot('leader', true)
+        @endcomponent
     @endif
 
-    <h2 class="has-text-centered title is-3">{{ $department->name }} Teams</h2>
-    @foreach($department->teams as $team)
-        @if(isset($team->leader) && $team->leader)
-            <div class="org-chart-team">
-                <h3 class="has-text-centered title is-4">{{ $team->name }}</h3>
-                @component('components.employee-iterator')
+    <div class="org-chart-group org-chart-group-department">
+        @foreach($department->teams as $team)
+            @if(isset($team->leader) && $team->leader)
+                @component('components.employee')
                     @slot('employee', $team->leader)
-                    @slot('leader', true)
+                    @slot('team_name', $team->name)
                 @endcomponent
+            @endif
+        @endforeach
+
+        @foreach($department->teams as $team)
+            <div class="org-chart-group org-chart-group-{{ $team->id }}-team">
+                @if(isset($team->employees) && $team->employees->count() > 0)
+                    @foreach($team->employees as $employee)
+                        @component('components.employee')
+                            @slot('employee', $employee)
+                        @endcomponent
+                    @endforeach
+                @endif
+                <style>
+                    .org-chart-group-{{ $team->id }}-team {
+                        grid-template-columns: repeat({{ $team->employees->count() }}, 1fr);
+                    }
+                </style>
             </div>
-        @endif
-    @endforeach
+        @endforeach
+
+        <style>
+            .org-chart-group-department {
+                grid-template-columns: repeat({{ $department->teams->count() }}, 1fr);
+            }
+        </style>
+    </div>
 @endsection
 
 <style>
-    .department-leader {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .org-chart-team {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        max-width: 100%;
-        margin-top: 3rem;
-    }
-
     .org-chart-employee {
         position: relative;
     }
@@ -64,9 +67,6 @@
     .org-chart-group {
         display: grid;
         align-items: start;
-        align-content: center;
-        justify-items: center;
-        justify-content: center;
-        grid-gap: 0.5rem;
+        grid-gap: 0 0.5rem;
     }
 </style>

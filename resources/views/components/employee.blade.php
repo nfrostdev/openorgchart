@@ -4,4 +4,7 @@
     @endif
     <div class="has-text-weight-semibold">{{ $employee->first_name }} {{ $employee->last_name }}</div>
     <div class="has-text-weight-light">{{ $employee->title }}</div>
+    @if(isset($team_name))
+        <div class="is-size-7">{{ $team_name }}</div>
+    @endif
 </div>

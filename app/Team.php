@@ -15,7 +15,7 @@ class Team extends Model
 
     public function employees()
     {
-        return $this->hasMany('App\Employee');
+        return $this->hasMany('App\Employee')->where('id', '!=', $this->leader_id);
     }
 
     public function leader()
