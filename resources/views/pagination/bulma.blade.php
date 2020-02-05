@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
     <nav class="pagination" role="navigation" aria-label="pagination">
         {{-- Previous Page Link --}}
-        <a class="pagination-previous"
+        <a class="pagination-previous has-background-white"
            rel="prev"
            @if ($paginator->onFirstPage())
            aria-disabled="true" disabled
@@ -11,7 +11,7 @@
            aria-label="@lang('pagination.previous')">Previous</a>
 
         {{-- Next Page Link --}}
-        <a class="pagination-previous"
+        <a class="pagination-previous has-background-white"
            rel="next"
            @if ($paginator->hasMorePages())
            href="{{ $paginator->nextPageUrl() }}"

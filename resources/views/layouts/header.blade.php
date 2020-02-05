@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar card" aria-label="main navigation">
+    <nav class="navbar is-dark card" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
@@ -10,25 +10,27 @@
                 </a>
             </div>
             <div id="primary-menu" class="navbar-menu">
-                <div class="navbar-start">
-                    @component('components.navbar-item')
-                        @slot('route', 'departments.index')
-                        @slot('icon', 'sitemap')
-                        @slot('text', 'Departments')
-                    @endcomponent
+                @auth
+                    <div class="navbar-start">
+                        @component('components.navbar-item')
+                            @slot('route', 'departments.index')
+                            @slot('icon', 'sitemap')
+                            @slot('text', 'Departments')
+                        @endcomponent
 
-                    @component('components.navbar-item')
-                        @slot('route', 'teams.index')
-                        @slot('icon', 'circle-notch')
-                        @slot('text', 'Teams')
-                    @endcomponent
+                        @component('components.navbar-item')
+                            @slot('route', 'teams.index')
+                            @slot('icon', 'circle-notch')
+                            @slot('text', 'Teams')
+                        @endcomponent
 
-                    @component('components.navbar-item')
-                        @slot('route', 'employees.index')
-                        @slot('icon', 'users')
-                        @slot('text', 'Employees')
-                    @endcomponent
-                </div>
+                        @component('components.navbar-item')
+                            @slot('route', 'employees.index')
+                            @slot('icon', 'users')
+                            @slot('text', 'Employees')
+                        @endcomponent
+                    </div>
+                @endauth
                 <div class="navbar-end">
                     <hr class="navbar-divider">
                     @guest
