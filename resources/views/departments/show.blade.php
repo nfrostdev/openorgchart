@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
-@section('title', $department->name . ' - Department')
+@section('title', $department->name)
 
 @section('content')
-    <h2 class="has-text-centered title is-3">{{ $department->name }}</h2>
+    @component('components.department-navigation')
+        @slot('departments', $departments)
+    @endcomponent
 
     <div class="department-leader">
         @if(isset($department->leader) && $department->leader)
