@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class DepartmentController extends Controller
@@ -21,7 +24,7 @@ class DepartmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -32,7 +35,7 @@ class DepartmentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -42,19 +45,19 @@ class DepartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Department $department
-     * @return \Illuminate\Http\Response
+     * @param Department $department
+     * @return View
      */
     public function show(Department $department)
     {
-        //
+        return view('departments.show', ['department' => $department]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Department $department
-     * @return \Illuminate\Http\Response
+     * @param Department $department
+     * @return Response
      */
     public function edit(Department $department)
     {
@@ -65,8 +68,8 @@ class DepartmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Department $department
-     * @return \Illuminate\Http\Response
+     * @param Department $department
+     * @return Response
      */
     public function update(Request $request, Department $department)
     {
@@ -76,8 +79,8 @@ class DepartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Department $department
-     * @return \Illuminate\Http\Response
+     * @param Department $department
+     * @return Response
      */
     public function destroy(Department $department)
     {

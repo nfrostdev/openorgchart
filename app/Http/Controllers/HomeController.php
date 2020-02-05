@@ -24,6 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index', ['department' => Department::first()]);
+        return view('index', ['departments' => Department::all()]);
     }
 }
