@@ -5,12 +5,14 @@
 @section('content')
     <h2 class="has-text-centered title is-3">{{ $department->name }}</h2>
 
-    @if(isset($department->leader) && $department->leader)
-        @component('components.employee')
-            @slot('employee', $department->leader)
-            @slot('leader', true)
-        @endcomponent
-    @endif
+    <div class="department-leader">
+        @if(isset($department->leader) && $department->leader)
+            @component('components.employee')
+                @slot('employee', $department->leader)
+                @slot('leader', true)
+            @endcomponent
+        @endif
+    </div>
 
     <div class="org-chart-group org-chart-group-department">
         @foreach($department->teams as $team)
@@ -18,12 +20,13 @@
                 @component('components.employee')
                     @slot('employee', $team->leader)
                     @slot('team_name', $team->name)
+                    @slot('leader', true)
                 @endcomponent
             @endif
         @endforeach
 
         @foreach($department->teams as $team)
-            <div class="org-chart-group org-chart-group-{{ $team->id }}-team">
+            <div class="org-chart-group">
                 @if(isset($team->employees) && $team->employees->count() > 0)
                     @foreach($team->employees as $employee)
                         @component('components.employee')
@@ -31,11 +34,6 @@
                         @endcomponent
                     @endforeach
                 @endif
-                <style>
-                    .org-chart-group-{{ $team->id }}-team {
-                        grid-template-columns: repeat({{ $team->employees->count() }}, 1fr);
-                    }
-                </style>
             </div>
         @endforeach
 
@@ -48,28 +46,71 @@
 @endsection
 
 <style>
+    .department-leader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 3rem;
+        font-size: 125%;
+    }
+
     .org-chart-employee {
         position: relative;
-        display: flex !important;
+        display: inline-flex !important;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
+    .org-chart-employee.leader {
+        z-index: 10;
+        justify-self: center;
+    }
+
     .org-chart-employee-pointer {
         position: absolute;
         display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        top: -1.5rem;
-        height: 1.5rem;
-        background-color: #77F;
-        width: 0.125rem;
+        width: 0.813rem;
+        background-color: #3273dc;
+        height: 0.125rem;
         pointer-events: none;
+    }
+
+    .org-chart-employee-pointer__top {
+        top: -100%;
+        height: 150%;
+        width: 0.125rem;
+        z-index: -1;
+    }
+
+    .org-chart-employee:nth-child(odd):not(.leader) {
+        justify-self: end;
+    }
+
+    .org-chart-employee:nth-child(even):not(.leader) {
+        justify-self: start;
+    }
+
+    .org-chart-employee:nth-child(odd) .org-chart-employee-pointer {
+        right: -0.813rem;
+    }
+
+    .org-chart-employee:nth-child(odd) .org-chart-employee-pointer__top {
+        right: -0.813rem;
+    }
+
+    .org-chart-employee:nth-child(even) .org-chart-employee-pointer {
+        left: -0.813rem;
+    }
+
+    .org-chart-employee:nth-child(even) .org-chart-employee-pointer__top {
+        left: -0.813rem;
     }
 
     .org-chart-group {
         display: grid;
+        align-items: start;
         grid-gap: 0 1.5rem;
+        grid-template-columns: repeat(2, 1fr);
     }
 </style>
