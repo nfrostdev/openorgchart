@@ -39,7 +39,9 @@
 
         <style>
             .org-chart-group-department {
-                grid-template-columns: repeat({{ $department->teams->count() }}, 1fr);
+                grid-template-columns: repeat({{ $department->teams->count() }}, minmax(24rem, 1fr));
+                max-width: 100vw;
+                overflow: auto;
             }
         </style>
     </div>
@@ -50,7 +52,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
         font-size: 125%;
     }
 
@@ -65,6 +67,7 @@
     .org-chart-employee.leader {
         z-index: 10;
         justify-self: center;
+        margin-bottom: 0 !important;
     }
 
     .org-chart-employee-pointer {
@@ -77,8 +80,8 @@
     }
 
     .org-chart-employee-pointer__top {
-        top: -100%;
-        height: 150%;
+        top: -150%;
+        height: 200%;
         width: 0.125rem;
         z-index: -1;
     }
@@ -91,18 +94,12 @@
         justify-self: start;
     }
 
-    .org-chart-employee:nth-child(odd) .org-chart-employee-pointer {
-        right: -0.813rem;
-    }
-
+    .org-chart-employee:nth-child(odd) .org-chart-employee-pointer,
     .org-chart-employee:nth-child(odd) .org-chart-employee-pointer__top {
         right: -0.813rem;
     }
 
-    .org-chart-employee:nth-child(even) .org-chart-employee-pointer {
-        left: -0.813rem;
-    }
-
+    .org-chart-employee:nth-child(even) .org-chart-employee-pointer,
     .org-chart-employee:nth-child(even) .org-chart-employee-pointer__top {
         left: -0.813rem;
     }
@@ -111,6 +108,8 @@
         display: grid;
         align-items: start;
         grid-gap: 0 1.5rem;
+        padding: 1.5rem 0.5rem 0.5rem;
+        overflow: hidden;
         grid-template-columns: repeat(2, 1fr);
     }
 </style>
