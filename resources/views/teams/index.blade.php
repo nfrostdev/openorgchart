@@ -4,9 +4,10 @@
 
 @section('content')
     <p class="content has-text-centered">Teams are where employees are grouped.</p>
-    <div class="content has-text-centered">
-        <a href="{{ route('teams.create') }}" class="button card">New Team</a>
-    </div>
+    @component('components.create-button')
+        @slot('route', route('teams.create'))
+        @slot('text', 'New Team')
+    @endcomponent
     @if($teams->count())
         @component('components.table')
             @slot('headers', ['ID', 'Name', 'Leader', 'Department', 'Employees', 'Created', 'Last Updated'])

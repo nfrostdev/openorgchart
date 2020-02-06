@@ -11,6 +11,16 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.0/css/bulma.min.css" integrity="sha256-D9M5yrVDqFlla7nlELDaYZIpXfFWDytQtiV+TaH6F1I=" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css?family=Gelasio:400,500,600,700|Public+Sans:300,400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Public Sans', sans-serif;
+        }
+
+        h1, p {
+            font-family: 'Gelasio', serif !important;
+        }
+    </style>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>

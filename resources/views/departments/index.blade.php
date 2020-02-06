@@ -4,9 +4,12 @@
 
 @section('content')
     <p class="content has-text-centered">Departments are the broadest level of organization for your institution.</p>
-    <div class="content has-text-centered">
-        <a href="{{ route('departments.create') }}" class="button card">New Department</a>
-    </div>
+
+    @component('components.create-button')
+        @slot('route', route('departments.create'))
+        @slot('text', 'New Department')
+    @endcomponent
+
     @if($departments->count())
         @component('components.table')
             @slot('headers', ['ID', 'Name', 'Leader', 'Teams', 'Created', 'Last Updated'])
