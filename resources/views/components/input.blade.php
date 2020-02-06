@@ -4,7 +4,7 @@
         @if($type === 'select')
             <select id="{{ $id }}"
                     type="{{ $type }}"
-                    class="input @error($id) is-invalid @enderror"
+                    class="input card @error($id) is-invalid @enderror"
                     name="{{ $id }}"
                 {{ isset($autocomplete) ? 'autocomplete=' . $autocomplete : '' }}>
                 {{ $slot }}
@@ -12,7 +12,7 @@
         @else
             <input id="{{ $id }}"
                    type="{{ $type }}"
-                   class="input @error($id) is-invalid @enderror"
+                   class="input card @error($id) is-invalid @enderror"
                    name="{{ $id }}"
                    value="{{ isset($value) ? $value : old($id) }}"
                    @if(isset($required) && $required) required @endif

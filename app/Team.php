@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    protected $fillable = ['department_id', 'name'];
+    protected $fillable = ['department_id', 'name', 'leader_id'];
 
     public function department()
     {
