@@ -13,6 +13,10 @@
                 @slot('employee', $department->leader)
                 @slot('leader', true)
             @endcomponent
+        @else
+            @component('components.leader-placeholder')
+                @slot('type', 'Department')
+            @endcomponent
         @endif
     </div>
 

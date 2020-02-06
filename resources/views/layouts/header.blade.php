@@ -41,12 +41,6 @@
                         @endif
                     @else
                         @component('components.navbar-item')
-                            @slot('route', 'dashboard')
-                            @slot('icon', 'home')
-                            @slot('text', 'Dashboard')
-                        @endcomponent
-
-                        @component('components.navbar-item')
                             @slot('route', 'users.index')
                             @slot('icon', 'user-shield')
                             @slot('text', 'Users')

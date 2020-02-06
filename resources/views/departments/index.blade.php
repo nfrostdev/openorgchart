@@ -19,8 +19,7 @@
                     <td>{{ $department->created_at }}</td>
                     <td>{{ $department->updated_at }}</td>
                     <td>
-                        <form id="destroy-department-{{ $department->id }}"
-                              method="POST"
+                        <form method="POST"
                               action="{{ route('departments.destroy', ['department' => $department->id]) }}"
                               onsubmit="confirmDeleteDepartment(event, '{{ $department->name }}')"
                               class="is-marginless">

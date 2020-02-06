@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
                 'department_id' => $department->id,
             ]);
         });
-        factory(\App\Employee::class, 150)->create();
+        factory(\App\Employee::class, 100)->create();
 
         // Assign department and team leaders after employees are seeded.
         \App\Department::all()->each(function ($department) {
