@@ -5,7 +5,7 @@
 @section('content')
     @component('components.form')
         @slot('method', 'POST')
-        @slot('action', 'login')
+        @slot('action', route('login'))
         @slot('callback', 'showSubmitButtonLoading')
 
         @component('components.input')

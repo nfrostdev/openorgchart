@@ -5,7 +5,7 @@
 @section('content')
     @component('components.form')
         @slot('method', 'POST')
-        @slot('action', 'password.email')
+        @slot('action', route('password.email'))
         @slot('callback', 'showSubmitButtonLoading')
 
         @if (session('status'))

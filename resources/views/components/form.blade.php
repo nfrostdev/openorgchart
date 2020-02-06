@@ -1,7 +1,8 @@
 <div class="columns is-centered">
-    <form method="{{ $method }}" action="{{ route($action) }}" class="column is-one-quarter" {{ isset($callback) ? 'onsubmit=' . $callback . '()' : ''}}>
-        @if(strtoupper($method) === 'POST')
+    <form method="{{ strtoupper($method) === 'GET' ? 'GET' : 'POST'  }}" action="{{ $action }}" class="column is-one-quarter" {{ isset($callback) ? 'onsubmit=' . $callback . '()' : ''}}>
+        @if(strtoupper($method) !== 'GET')
             @csrf
+            @method($method)
         @endif
         {{ $slot }}
     </form>

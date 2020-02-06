@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Department;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
+use App\Employee;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class DepartmentController extends Controller
@@ -24,22 +24,29 @@ class DepartmentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return View
      */
     public function create()
     {
-        //
+        return view('departments.create', ['employees' => Employee::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'leader_id' => 'nullable|exists:employees'
+        ]);
+
+        Department::create($request->all());
+
+        return redirect()->route('departments.index');
     }
 
     /**
@@ -60,33 +67,48 @@ class DepartmentController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Department $department
-     * @return Response
+     * @return View
      */
     public function edit(Department $department)
     {
-        //
+        return view('departments.edit', [
+            'department' => $department,
+            'employees' => Employee::all()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param Department $department
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(Request $request, Department $department)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'leader_id' => 'nullable|exists:employees'
+        ]);
+
+        $department->update($request->all());
+
+        return redirect()->route('departments.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param Department $department
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy(Department $department)
     {
-        //
+        try {
+            $department->delete();
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e);
+        }
+        return redirect()->route('departments.index');
     }
 }

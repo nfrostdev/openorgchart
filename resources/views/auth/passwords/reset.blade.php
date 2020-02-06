@@ -5,7 +5,7 @@
 @section('content')
     @component('components.form')
         @slot('method', 'POST')
-        @slot('action', 'password.update')
+        @slot('action', route('password.update'))
         @slot('callback', 'showSubmitButtonLoading')
 
         <input type="hidden" name="token" value="{{ $token }}">
