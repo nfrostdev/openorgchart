@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 19)->create();
-        factory(Department::class, 20)->create()->each(function ($department) {
+        factory(User::class, rand(1, 19))->create();
+        factory(Department::class, rand(1, 20))->create()->each(function ($department) {
             factory(Team::class, rand(1, 5))->create([
                 'department_id' => rand(0, 7) ? $department->id : null,
             ]);
         });
-        factory(Employee::class, 500)->create();
+        factory(Employee::class, rand(250, 500))->create();
 
         // Assign department and team leaders after employees are seeded.
         Department::all()->each(function ($department) {
