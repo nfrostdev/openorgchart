@@ -33,13 +33,10 @@ class DatabaseSeeder extends Seeder
 
             $department->teams->each(function ($team) {
                 if (rand(0, 7)) {
-                    $employee = Employee::all()
-                        ->where('team_id', $team->id)
-                        ->random()
-                        ->exists();
+                    $employee = Employee::where('team_id', $team->id)->first();
 
                     // Check if there are employees in this team before assigning a leader from it.
-                    if (!$employee) {
+                    if ($employee) {
                         $team->update([
                             'leader_id' => Employee::all()
                                 ->where('team_id', $team->id)
