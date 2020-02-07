@@ -22,16 +22,18 @@
 
     <div class="org-chart-group org-chart-group-department">
         @foreach($department->teams as $team)
+            <h2 class="subtitle is-4 has-text-centered">{{ $team->name }}</h2>
             @if(isset($team->leader) && $team->leader)
                 @component('components.employee')
                     @slot('employee', $team->leader)
-                    @slot('team_name', $team->name)
                     @slot('leader', true)
                 @endcomponent
+            @else
+                @component('components.leader-placeholder')
+                    @slot('type', 'Team')
+                @endcomponent
             @endif
-        @endforeach
 
-        @foreach($department->teams as $team)
             <div class="org-chart-group">
                 @if(isset($team->employees) && $team->employees->count() > 0)
                     @foreach($team->employees as $employee)
@@ -42,23 +44,34 @@
                 @endif
             </div>
         @endforeach
-
-        <style>
-            .org-chart-group-department {
-                grid-template-columns: repeat({{ $department->teams->count() }}, minmax(24rem, 1fr)) !important;
-                max-width: 100vw;
-                overflow: auto;
-            }
-        </style>
     </div>
 
     <style>
+        .org-chart-group {
+            display: grid;
+            align-items: start;
+            grid-gap: 0 1.5rem;
+            padding: 1.5rem 0.5rem 4rem;
+            overflow: hidden;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .org-chart-group .box {
+            margin: 0 0 1.5rem !important;
+        }
+
+        .org-chart-group-department {
+            grid-template-columns: 1fr;
+            max-width: 100vw;
+            overflow: auto;
+        }
+
         .department-leader {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 2rem;
             font-size: 125%;
+            margin-bottom: 3rem;
         }
 
         .org-chart-employee {
@@ -107,15 +120,6 @@
         .org-chart-employee:nth-child(even) .org-chart-employee-pointer,
         .org-chart-employee:nth-child(even) .org-chart-employee-pointer__top {
             left: -0.813rem;
-        }
-
-        .org-chart-group {
-            display: grid;
-            align-items: start;
-            grid-gap: 0 1.5rem;
-            padding: 1.5rem 0.5rem 0.5rem;
-            overflow: hidden;
-            grid-template-columns: repeat(2, 1fr);
         }
     </style>
 @endsection

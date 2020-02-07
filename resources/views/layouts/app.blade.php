@@ -17,7 +17,7 @@
             font-family: 'Public Sans', sans-serif;
         }
 
-        h1, p {
+        h1, h2, p {
             font-family: 'Gelasio', serif !important;
         }
     </style>
