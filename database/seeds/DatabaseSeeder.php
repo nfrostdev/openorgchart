@@ -1,5 +1,9 @@
 <?php
 
+use App\Department;
+use App\Employee;
+use App\Team;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,26 +15,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\User::class, 24)->create();
-        factory(\App\Department::class, 5)->create()->each(function ($department) {
-            factory(\App\Team::class, rand(1, 5))->create([
-                'department_id' => $department->id,
+        factory(User::class, 19)->create();
+        factory(Department::class, 20)->create()->each(function ($department) {
+            factory(Team::class, rand(1, 5))->create([
+                'department_id' => rand(0, 7) ? $department->id : null,
             ]);
         });
-        factory(\App\Employee::class, 100)->create();
+        factory(Employee::class, 500)->create();
 
         // Assign department and team leaders after employees are seeded.
-        \App\Department::all()->each(function ($department) {
-            $department->update([
-                'leader_id' => \App\Employee::all()->random()->id
-            ]);
+        Department::all()->each(function ($department) {
+            if (rand(0, 7)) {
+                $department->update([
+                    'leader_id' => Employee::all()->random()->id
+                ]);
+            }
 
             $department->teams->each(function ($team) {
-                $team->update([
-                    'leader_id' => \App\Employee::all()
-                        ->where('team_id', $team->id)
-                        ->random()->id
-                ]);
+                if (rand(0, 7)) {
+                    $team->update([
+                        'leader_id' => Employee::all()
+                            ->where('team_id', $team->id)
+                            ->random()->id
+                    ]);
+                }
             });
         });
     }
