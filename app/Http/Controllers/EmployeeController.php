@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Team;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -21,28 +24,37 @@ class EmployeeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
-        //
+        return view('employees.create', ['teams' => Team::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'title' => 'required|string',
+            'team_id' => 'nullable|exists:teams,id'
+        ]);
+
+        Employee::create($request->all());
+
+        return redirect()->route('employees.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param Employee $employee
      * @return \Illuminate\Http\Response
      */
     public function show(Employee $employee)
@@ -53,34 +65,51 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return View
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employees.edit', [
+            'employee' => $employee,
+            'teams' => Team::all()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Employee $employee
+     * @return RedirectResponse
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'title' => 'required|string',
+            'team_id' => 'nullable|exists:teams,id'
+        ]);
+
+        $employee->update($request->all());
+
+        return redirect()->route('employees.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return RedirectResponse
      */
     public function destroy(Employee $employee)
     {
-        //
+        try {
+            $employee->delete();
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors($e);
+        }
+        return redirect()->route('employees.index');
     }
 }

@@ -17,7 +17,7 @@
                     <td><a href="{{ route('teams.edit', ['team' => $team->id]) }}">{{ $team->name }}</a></td>
                     <td>{!! $team->leader->first_name ?? '<strong>No Team Leader</strong>' !!} {{ $team->leader->last_name ?? '' }}</td>
                     <td>{!! $team->department->name ?? '<strong>No Department</strong>' !!}</td>
-                    <td>{{ $team->employees->count() }}</td>
+                    <td>{{ $team->leader ? $team->employees->count() + 1 : $team->employees->count() }}</td>
                     <td>{{ $team->created_at }}</td>
                     <td>{{ $team->updated_at }}</td>
                 </tr>
