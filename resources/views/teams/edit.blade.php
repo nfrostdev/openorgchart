@@ -24,7 +24,7 @@
             <option value="">None</option>
             @foreach($departments as $department)
                 <option value="{{ $department->id }}" {{ isset($team->department->id) && $department->id === $team->department->id ? 'selected' : '' }}>
-                    {{ $department->name }}
+                    {{ $department->name }} (ID # {{ $department->id}})
                 </option>
             @endforeach
         @endcomponent
@@ -37,7 +37,7 @@
             <option value="">None</option>
             @foreach($employees as $employee)
                 <option value="{{ $employee->id }}" {{ $employee->id === $team->leader_id ? 'selected' : '' }}>
-                    {{ $employee->first_name }} {{ $employee->last_name }} - {{ $employee->team->name ?? 'No Team Assigned' }}
+                    {{ $employee->first_name }} (ID # {{ $employee->id}})
                 </option>
             @endforeach
         @endcomponent

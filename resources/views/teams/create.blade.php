@@ -23,7 +23,7 @@
             <option value="">None</option>
             @foreach($departments as $department)
                 <option value="{{ $department->id }}" {{ old('department_id') && $department->id === old('department_id') ? 'selected' : '' }}>
-                    {{ $department->name }}
+                    {{ $department->name }} (ID # {{ $department->id}})
                 </option>
             @endforeach
         @endcomponent
@@ -36,7 +36,7 @@
             <option value="">None</option>
             @foreach($employees as $employee)
                 <option value="{{ $employee->id }}" {{ old('leader_id') && $employee->id === old('leader_id') ? 'selected' : '' }}>
-                    {{ $employee->first_name }} {{ $employee->last_name }} - {{ $employee->team->name ?? 'No Team Assigned' }}
+                    {{ $employee->first_name }} (ID # {{ $employee->id}})
                 </option>
             @endforeach
         @endcomponent
