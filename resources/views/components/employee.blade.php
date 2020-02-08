@@ -32,12 +32,12 @@
 @endphp
 
 <style>
-    /*.employee {*/
-    /*    display: flex;*/
-    /*    justify-content: center;*/
-    /*    align-items: center;*/
-    /*    flex-direction: column;*/
-    /*}*/
+    .employee {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-direction: column;
+    }
 
     .employee-box-name {
         line-height: 100%;
