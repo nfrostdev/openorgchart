@@ -18,10 +18,12 @@ Auth::routes([
 ]);
 
 Route::middleware('auth')->group(function () {
+    Route::middleware('role:Administrator')->group(function () {
+        Route::resource('users', 'UserController');
+    });
     Route::resource('departments', 'DepartmentController')->except('index', 'show');
     Route::resource('teams', 'TeamController');
     Route::resource('employees', 'EmployeeController');
-    Route::resource('users', 'UserController');
 });
 
 Route::get('/', 'HomeController@index')->name('index');

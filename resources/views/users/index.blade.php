@@ -3,15 +3,20 @@
 @section('title', 'Users')
 
 @section('content')
-    <p class="content has-text-centered">Users have an account for this application and are allowed to modify content.</p>
+    <p class="content has-text-centered">Administrators can manage other users and content. Editors can only manage content.</p>
+    @component('components.create-button')
+        @slot('route', route('users.create'))
+        @slot('text', 'New User')
+    @endcomponent
     @if($users->count())
         @component('components.table')
-            @slot('headers', ['ID', 'Name', 'E-mail', 'Created', 'Last Updated'])
+            @slot('headers', ['ID', 'Name', 'E-mail', 'Role', 'Created', 'Last Updated'])
             @foreach($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->first_name }} {{ $user->last_name }}</td>
+                    <td><a href="{{ route('users.edit', ['user' => $user->id]) }}">{{ $user->first_name }} {{ $user->last_name }}</a></td>
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->role->name ?? 'User' }}</td>
                     <td>{{ $user->created_at }}</td>
                     <td>{{ $user->updated_at }}</td>
                 </tr>

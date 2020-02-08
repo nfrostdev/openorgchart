@@ -23,7 +23,7 @@
             <option value="">None</option>
             @foreach($employees as $employee)
                 <option value="{{ $employee->id }}" {{ old('leader_id') && $employee->id === old('leader_id') ? 'selected' : '' }}>
-                    {{ $employee->first_name }} {{ $employee->last_name }} - {{ $employee->team->name ?? 'No Team Assigned' }}
+                    {{ $employee->first_name }} {{ $employee->last_name }} (ID #{{ $employee->id }})
                 </option>
             @endforeach
         @endcomponent

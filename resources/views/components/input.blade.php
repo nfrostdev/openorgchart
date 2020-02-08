@@ -2,17 +2,19 @@
     <label for="{{ $id }}" class="label">{{ $label }}</label>
     <div class="control @if(isset($icon)) has-icons-left @endif">
         @if($type === 'select')
-            <select id="{{ $id }}"
-                    type="{{ $type }}"
-                    class="input card @error($id) is-invalid @enderror"
-                    name="{{ $id }}"
-                {{ isset($autocomplete) ? 'autocomplete=' . $autocomplete : '' }}>
-                {{ $slot }}
-            </select>
+            <div class="select">
+                <select id="{{ $id }}"
+                        type="{{ $type }}"
+                        class="input @error($id) is-invalid @enderror"
+                        name="{{ $id }}"
+                    {{ isset($autocomplete) ? 'autocomplete=' . $autocomplete : '' }}>
+                    {{ $slot }}
+                </select>
+            </div>
         @else
             <input id="{{ $id }}"
                    type="{{ $type }}"
-                   class="input card @error($id) is-invalid @enderror"
+                   class="input @error($id) is-invalid @enderror"
                    name="{{ $id }}"
                    value="{{ isset($value) ? $value : old($id) }}"
                    @if(isset($required) && $required) required @endif
