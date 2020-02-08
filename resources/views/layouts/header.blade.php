@@ -26,12 +26,6 @@
                         @endcomponent
 
                         @component('components.navbar-item')
-                            @slot('route', 'teams.index')
-                            @slot('icon', 'circle-notch')
-                            @slot('text', 'Teams')
-                        @endcomponent
-
-                        @component('components.navbar-item')
                             @slot('route', 'employees.index')
                             @slot('icon', 'users')
                             @slot('text', 'Employees')

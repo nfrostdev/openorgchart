@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Department;
 use App\Employee;
-use App\Team;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,7 +28,10 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create', ['teams' => Team::all()]);
+        return view('employees.create', [
+            'departments' => Department::all(),
+            'employees' => Employee::all()
+        ]);
     }
 
     /**
@@ -43,7 +46,8 @@ class EmployeeController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'title' => 'required|string',
-            'team_id' => 'nullable|exists:teams,id'
+            'department_id' => 'nullable|exists:departments,id',
+            'supervisor_id' => 'nullable|exists:employees,id'
         ]);
 
         Employee::create($request->all());
@@ -72,7 +76,8 @@ class EmployeeController extends Controller
     {
         return view('employees.edit', [
             'employee' => $employee,
-            'teams' => Team::all()
+            'departments' => Department::all(),
+            'employees' => Employee::all()
         ]);
     }
 
@@ -89,8 +94,10 @@ class EmployeeController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'title' => 'required|string',
-            'team_id' => 'nullable|exists:teams,id'
+            'department_id' => 'nullable|exists:departments,id',
+            'supervisor_id' => 'nullable|exists:employees,id'
         ]);
+        // TODO: Make sure user isn't assigned to be their own manager.
 
         $employee->update($request->all());
 

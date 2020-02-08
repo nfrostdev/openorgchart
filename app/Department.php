@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
-    protected $fillable = ['name', 'leader_id'];
+    protected $fillable = ['name', 'employee_id'];
 
-    public function teams()
+    public function employees()
     {
-        return $this->hasMany('App\Team');
+        return $this->hasMany('App\Employee');
     }
 
     public function leader()
     {
-        return $this->hasOne('App\Employee', 'id', 'leader_id');
+        return $this->hasOne('App\Employee', 'id', 'employee_id');
     }
 }

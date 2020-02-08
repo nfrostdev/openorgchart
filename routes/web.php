@@ -22,7 +22,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', 'UserController');
     });
     Route::resource('departments', 'DepartmentController')->except('index', 'show');
-    Route::resource('teams', 'TeamController');
     Route::resource('employees', 'EmployeeController');
 });
 

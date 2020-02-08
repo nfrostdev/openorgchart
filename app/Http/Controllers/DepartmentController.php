@@ -41,7 +41,7 @@ class DepartmentController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'leader_id' => 'nullable|exists:employees,id'
+            'employee_id' => 'nullable|exists:employees,id'
         ]);
 
         Department::create($request->all());
@@ -88,7 +88,7 @@ class DepartmentController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'leader_id' => 'nullable|exists:employees,id'
+            'employee_id' => 'nullable|exists:employees,id'
         ]);
 
         $department->update($request->all());

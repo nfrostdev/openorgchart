@@ -16,15 +16,14 @@
         @endcomponent
 
         @component('components.input')
-            @slot('id', 'leader_id')
-            @slot('label', 'Department Leader')
+            @slot('id', 'employee_id')
+            @slot('label', 'Leader')
             @slot('type', 'select')
+            @slot('required', false)
 
             <option value="">None</option>
             @foreach($employees as $employee)
-                <option value="{{ $employee->id }}" {{ old('leader_id') && $employee->id === old('leader_id') ? 'selected' : '' }}>
-                    {{ $employee->first_name }} {{ $employee->last_name }} (ID #{{ $employee->id }})
-                </option>
+                <option value="{{ $employee->id }}">{{ $employee->first_name }} {{ $employee->last_name }}</option>
             @endforeach
         @endcomponent
 

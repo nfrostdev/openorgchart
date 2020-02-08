@@ -6,10 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $fillable = ['team_id', 'first_name', 'last_name', 'title'];
+    protected $fillable = ['first_name', 'last_name', 'title', 'department_id', 'supervisor_id'];
+
+    public function department()
+    {
+        return $this->belongsTo('App\Department');
+    }
+
+    public function supervisor()
+    {
+        return $this->hasOne('App\Employee', 'id', 'supervisor_id');
+    }
 
     public function team()
     {
-        return $this->belongsTo('App\Team');
+        return $this->hasMany('App\Employee', 'supervisor_id', 'id');
     }
 }

@@ -33,14 +33,29 @@
         @endcomponent
 
         @component('components.input')
-            @slot('id', 'team_id')
-            @slot('label', 'Team')
+            @slot('id', 'department_id')
+            @slot('label', 'Department')
             @slot('type', 'select')
+            @slot('required', false)
 
             <option value="">None</option>
-            @foreach($teams as $team)
-                <option value="{{ $team->id }}" {{ isset($employee->team->id) && $team->id === $employee->team->id ? 'selected' : '' }}>
-                    {{ $team->name }}
+            @foreach($departments as $department)
+                <option value="{{ $department->id }}" {{ isset($employee->department->id) && $employee->department->id === $department->id ? 'selected' : '' }}>
+                    {{ $department->name }}
+                </option>
+            @endforeach
+        @endcomponent
+
+        @component('components.input')
+            @slot('id', 'supervisor_id')
+            @slot('label', 'Supervisor')
+            @slot('type', 'select')
+            @slot('required', false)
+
+            <option value="">None</option>
+            @foreach($employees->where('id', '!=', $employee->id) as $supervisor)
+                <option value="{{ $supervisor->id }}" {{ isset($employee->supervisor->id) && $employee->supervisor->id === $supervisor->id ? 'selected' : '' }}>
+                    {{ $supervisor->first_name }} {{ $supervisor->last_name }} - {{ $supervisor->department->name ?? 'No Department' }}
                 </option>
             @endforeach
         @endcomponent

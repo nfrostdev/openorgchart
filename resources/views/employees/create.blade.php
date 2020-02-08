@@ -30,15 +30,26 @@
         @endcomponent
 
         @component('components.input')
-            @slot('id', 'team_id')
-            @slot('label', 'Team')
+            @slot('id', 'department_id')
+            @slot('label', 'Department')
             @slot('type', 'select')
+            @slot('required', false)
 
             <option value="">None</option>
-            @foreach($teams as $team)
-                <option value="{{ $team->id }}" {{ old('team_id') && $team->id === old('team_id') ? 'selected' : '' }}>
-                    {{ $team->name }} ({{ $team->department->name ?? 'No Department' }})
-                </option>
+            @foreach($departments as $department)
+                <option value="{{ $department->id }}">{{ $department->name }}</option>
+            @endforeach
+        @endcomponent
+
+        @component('components.input')
+            @slot('id', 'supervisor_id')
+            @slot('label', 'Supervisor')
+            @slot('type', 'select')
+            @slot('required', false)
+
+            <option value="">None</option>
+            @foreach($employees as $employee)
+                <option value="{{ $employee->id }}">{{ $employee->first_name }} {{ $employee->last_name }}</option>
             @endforeach
         @endcomponent
 
