@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(User::class, rand(1, 19))->create();
-        factory(Department::class, rand(2, 5))->create();
-        factory(Employee::class, rand(50, 100))->create();
+        factory(Department::class, rand(5, 20))->create();
+        factory(Employee::class, 1000)->create();
 
         Department::all()->each(function ($department) {
             $leader = Employee::where('department_id', $department->id)->get()->random();
@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
 
             Employee::where('department_id', $department->id)
                 ->where('id', '!=', $leader->id)
-                ->limit(rand(1, 5))
+                ->limit(rand(2, 4))
+                ->inRandomOrder()
                 ->get()
                 ->each(function ($supervisor) use ($department, $leader) {
                     $supervisor->update([
@@ -37,15 +38,28 @@ class DatabaseSeeder extends Seeder
                     Employee::where('department_id', $department->id)
                         ->where('id', '!=', $leader->id)
                         ->where('id', '!=', $supervisor->id)
-                        ->limit(rand(1, 5))
+                        ->limit(rand(0, 4))
+                        ->inRandomOrder()
                         ->get()
-                        ->each(function ($employee) use ($supervisor) {
+                        ->each(function ($employee) use ($department, $leader, $supervisor) {
                             $employee->update([
                                 'supervisor_id' => $supervisor->id
                             ]);
+
+                            Employee::where('department_id', $department->id)
+                                ->where('id', '!=', $leader->id)
+                                ->where('id', '!=', $supervisor->id)
+                                ->where('id', '!=', $employee->id)
+                                ->limit(rand(0, 3))
+                                ->inRandomOrder()
+                                ->get()
+                                ->each(function ($s_employee) use ($employee) {
+                                    $s_employee->update([
+                                        'supervisor_id' => $employee->id
+                                    ]);
+                                });
                         });
                 });
-
         });
     }
 }
