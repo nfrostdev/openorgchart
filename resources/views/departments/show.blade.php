@@ -11,6 +11,7 @@
     <div class="department">
         @component('components.employee')
             @slot('employee', $department->leader)
+            @slot('leader', true)
         @endcomponent
     </div>
 

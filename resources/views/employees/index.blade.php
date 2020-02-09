@@ -18,7 +18,7 @@
                     <td>{{ $employee->id }}</td>
                     <td><a href="{{ route('employees.edit', ['employee' => $employee->id]) }}">{{ $employee->first_name }} {{ $employee->last_name }}</a></td>
                     <td>{{ $employee->title }}</td>
-                    <td>{{ $employee->department->name }}</td>
+                    <td>{{ $employee->department->name ?? 'N/A' }}</td>
                     <td>{{ $employee->supervisor->first_name ?? 'N/A' }} {{ $employee->supervisor->last_name ?? '' }}</td>
                     <td>{{ $employee->team->count() ?? '0' }} Employees</td>
                     <td>{{ $employee->updated_at }}</td>
