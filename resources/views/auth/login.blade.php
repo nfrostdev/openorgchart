@@ -6,7 +6,7 @@
     @component('components.form')
         @slot('method', 'POST')
         @slot('action', route('login'))
-        @slot('callback', 'showSubmitButtonLoading')
+        @slot('submit_text', 'Login')
 
         @component('components.input')
             @slot('id', 'email')
@@ -35,19 +35,13 @@
             </div>
         </div>
 
-        @component('components.submit-button')
-            @slot('text', 'Login')
-            @slot('classes', 'is-link')
-        @endcomponent
-
-        <div class="field">
-            <div class="control">
-                @if (Route::has('password.request'))
-                    <a class="is-block has-text-centered is-size-7" href="{{ route('password.request') }}">
-                        {{ __('Forgot Your Password?') }}
-                    </a>
-                @endif
-            </div>
-        </div>
     @endcomponent
+
+    <div class="content has-text-centered">
+        @if (Route::has('password.request'))
+            <a class="is-block has-text-centered is-size-7" href="{{ route('password.request') }}">
+                {{ __('Forgot Your Password?') }}
+            </a>
+        @endif
+    </div>
 @endsection

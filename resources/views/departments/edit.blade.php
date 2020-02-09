@@ -6,7 +6,7 @@
     @component('components.form')
         @slot('method', 'PATCH')
         @slot('action', route('departments.update', ['department' => $department->id]))
-        @slot('callback', 'showSubmitButtonLoading')
+        @slot('submit_text', 'Save')
 
         @component('components.input')
             @slot('id', 'name')
@@ -20,23 +20,18 @@
             @slot('id', 'employee_id')
             @slot('label', 'Leader')
             @slot('type', 'select')
-            @slot('required', false)
 
             <option value="">None</option>
             @foreach($employees as $leader)
-{{--                TODO: selected --}}
+                {{-- TODO: selected --}}
                 <option value="{{ $leader->id }}">
                     {{ $leader->first_name }} {{ $leader->last_name }}
                 </option>
             @endforeach
         @endcomponent
-
-        @component('components.submit-button')
-            @slot('text', 'Update')
-            @slot('classes', 'is-link')
-        @endcomponent
     @endcomponent
 
+    {{-- TODO: Permanently Delete buttons should be abstracted. --}}
     <form method="POST"
           action="{{ route('departments.destroy', ['department' => $department->id]) }}"
           onsubmit="confirmDeleteDepartment(event, '{{ $department->name }}')"

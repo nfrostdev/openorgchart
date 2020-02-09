@@ -6,7 +6,7 @@
     @component('components.form')
         @slot('method', 'POST')
         @slot('action', route('password.update'))
-        @slot('callback', 'showSubmitButtonLoading')
+        @slot('submit_text', 'Change Password')
 
         <input type="hidden" name="token" value="{{ $token }}">
 
@@ -36,11 +36,6 @@
             @slot('required', true)
             @slot('autocomplete', 'new-password')
             @slot('icon', 'fa-lock')
-        @endcomponent
-
-        @component('components.submit-button')
-            @slot('text', 'Reset Password')
-            @slot('classes', 'is-link')
         @endcomponent
     @endcomponent
 @endsection

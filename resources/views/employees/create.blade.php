@@ -6,7 +6,7 @@
     @component('components.form')
         @slot('method', 'POST')
         @slot('action', route('employees.store'))
-        @slot('callback', 'showSubmitButtonLoading')
+        @slot('submit_text', 'Create')
 
         @component('components.input')
             @slot('id', 'first_name')
@@ -33,7 +33,6 @@
             @slot('id', 'supervisor_id')
             @slot('label', 'Supervisor')
             @slot('type', 'select')
-            @slot('required', false)
 
             <option value="">None</option>
             @foreach($employees as $employee)
@@ -41,9 +40,5 @@
             @endforeach
         @endcomponent
 
-        @component('components.submit-button')
-            @slot('text', 'Create')
-            @slot('classes', 'is-link')
-        @endcomponent
     @endcomponent
 @endsection

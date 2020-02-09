@@ -6,7 +6,7 @@
     @component('components.form')
         @slot('method', 'POST')
         @slot('action', route('password.email'))
-        @slot('callback', 'showSubmitButtonLoading')
+        @slot('submit_text', 'Send Password Reset Link')
 
         @if (session('status'))
             <div class="message is-success" role="alert">
@@ -23,11 +23,6 @@
             @slot('required', true)
             @slot('autocomplete', 'email')
             @slot('icon', 'fa-envelope')
-        @endcomponent
-
-        @component('components.submit-button')
-            @slot('text', 'Send Password Reset Link')
-            @slot('classes', 'is-warning')
         @endcomponent
     @endcomponent
 @endsection

@@ -6,7 +6,7 @@
     @component('components.form')
         @slot('method', 'POST')
         @slot('action', route('users.store'))
-        @slot('callback', 'showSubmitButtonLoading')
+        @slot('submit_text', 'Create')
 
         @component('components.input')
             @slot('id', 'first_name')
@@ -51,11 +51,6 @@
                     {{ $role->name }}
                 </option>
             @endforeach
-        @endcomponent
-
-        @component('components.submit-button')
-            @slot('text', 'Create')
-            @slot('classes', 'is-link')
         @endcomponent
     @endcomponent
 @endsection

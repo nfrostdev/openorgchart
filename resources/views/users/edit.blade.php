@@ -6,7 +6,7 @@
     @component('components.form')
         @slot('method', 'PATCH')
         @slot('action', route('users.update', ['user' => $user->id]))
-        @slot('callback', 'showSubmitButtonLoading')
+        @slot('submit_text', 'Save')
 
         @component('components.input')
             @slot('id', 'first_name')
@@ -40,11 +40,6 @@
         @endcomponent
 
         @if($user->id !== 1)
-
-            <div class="field">
-                <strong class="help is-info has-text-centered" role="alert">User can change their password after login.</strong>
-            </div>
-
             @component('components.input')
                 @slot('id', 'role_id')
                 @slot('label', 'Role')
@@ -59,10 +54,6 @@
             @endcomponent
         @endif
 
-        @component('components.submit-button')
-            @slot('text', 'Update')
-            @slot('classes', 'is-link')
-        @endcomponent
     @endcomponent
 
     @if($user->id !== 1 && $user->id !== Auth::user()->id)

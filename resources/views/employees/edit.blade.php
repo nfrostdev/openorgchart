@@ -6,7 +6,7 @@
     @component('components.form')
         @slot('method', 'PATCH')
         @slot('action', route('employees.update', ['employee' => $employee->id]))
-        @slot('callback', 'showSubmitButtonLoading')
+        @slot('submit_text', 'Save')
 
         @component('components.input')
             @slot('id', 'first_name')
@@ -36,7 +36,6 @@
             @slot('id', 'supervisor_id')
             @slot('label', 'Supervisor')
             @slot('type', 'select')
-            @slot('required', false)
 
             <option value="">None</option>
             @foreach($employees->where('id', '!=', $employee->id) as $supervisor)
@@ -46,10 +45,6 @@
             @endforeach
         @endcomponent
 
-        @component('components.submit-button')
-            @slot('text', 'Update')
-            @slot('classes', 'is-link')
-        @endcomponent
     @endcomponent
 
     <form method="POST"
