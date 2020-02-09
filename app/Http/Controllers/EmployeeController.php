@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Department;
 use App\Employee;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -29,7 +28,6 @@ class EmployeeController extends Controller
     public function create()
     {
         return view('employees.create', [
-            'departments' => Department::all(),
             'employees' => Employee::all()
         ]);
     }
@@ -46,7 +44,6 @@ class EmployeeController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'title' => 'required|string',
-            'department_id' => 'nullable|exists:departments,id',
             'supervisor_id' => 'nullable|exists:employees,id'
         ]);
 
@@ -76,7 +73,6 @@ class EmployeeController extends Controller
     {
         return view('employees.edit', [
             'employee' => $employee,
-            'departments' => Department::all(),
             'employees' => Employee::all()
         ]);
     }
@@ -94,7 +90,6 @@ class EmployeeController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'title' => 'required|string',
-            'department_id' => 'nullable|exists:departments,id',
             'supervisor_id' => 'nullable|exists:employees,id'
         ]);
         // TODO: Make sure user isn't assigned to be their own manager.

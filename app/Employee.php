@@ -6,12 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $fillable = ['first_name', 'last_name', 'title', 'department_id', 'supervisor_id'];
-
-    public function department()
-    {
-        return $this->belongsTo('App\Department');
-    }
+    protected $fillable = ['first_name', 'last_name', 'title', 'supervisor_id'];
 
     public function supervisor()
     {

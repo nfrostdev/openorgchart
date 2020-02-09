@@ -33,20 +33,6 @@
         @endcomponent
 
         @component('components.input')
-            @slot('id', 'department_id')
-            @slot('label', 'Department')
-            @slot('type', 'select')
-            @slot('required', false)
-
-            <option value="">None</option>
-            @foreach($departments as $department)
-                <option value="{{ $department->id }}" {{ isset($employee->department->id) && $employee->department->id === $department->id ? 'selected' : '' }}>
-                    {{ $department->name }}
-                </option>
-            @endforeach
-        @endcomponent
-
-        @component('components.input')
             @slot('id', 'supervisor_id')
             @slot('label', 'Supervisor')
             @slot('type', 'select')
@@ -55,7 +41,7 @@
             <option value="">None</option>
             @foreach($employees->where('id', '!=', $employee->id) as $supervisor)
                 <option value="{{ $supervisor->id }}" {{ isset($employee->supervisor->id) && $employee->supervisor->id === $supervisor->id ? 'selected' : '' }}>
-                    {{ $supervisor->first_name }} {{ $supervisor->last_name }} - {{ $supervisor->department->name ?? 'No Department' }}
+                    {{ $supervisor->first_name }} {{ $supervisor->last_name }}
                 </option>
             @endforeach
         @endcomponent

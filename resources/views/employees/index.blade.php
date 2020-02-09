@@ -12,13 +12,12 @@
 
     @if($employees->count())
         @component('components.table')
-            @slot('headers', ['ID', 'Name', 'Title','Department', 'Supervisor', 'Manages', 'Last Modified'])
+            @slot('headers', ['ID', 'Name', 'Title', 'Supervisor', 'Manages', 'Last Modified'])
             @foreach($employees as $employee)
                 <tr>
                     <td>{{ $employee->id }}</td>
                     <td><a href="{{ route('employees.edit', ['employee' => $employee->id]) }}">{{ $employee->first_name }} {{ $employee->last_name }}</a></td>
                     <td>{{ $employee->title }}</td>
-                    <td>{{ $employee->department->name ?? 'N/A' }}</td>
                     <td>{{ $employee->supervisor->first_name ?? 'N/A' }} {{ $employee->supervisor->last_name ?? '' }}</td>
                     <td>{{ $employee->team->count() ?? '0' }} Employees</td>
                     <td>{{ $employee->updated_at }}</td>

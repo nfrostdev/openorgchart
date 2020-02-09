@@ -30,18 +30,6 @@
         @endcomponent
 
         @component('components.input')
-            @slot('id', 'department_id')
-            @slot('label', 'Department')
-            @slot('type', 'select')
-            @slot('required', false)
-
-            <option value="">None</option>
-            @foreach($departments as $department)
-                <option value="{{ $department->id }}">{{ $department->name }}</option>
-            @endforeach
-        @endcomponent
-
-        @component('components.input')
             @slot('id', 'supervisor_id')
             @slot('label', 'Supervisor')
             @slot('type', 'select')

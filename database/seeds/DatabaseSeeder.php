@@ -19,14 +19,13 @@ class DatabaseSeeder extends Seeder
         factory(Employee::class, 1000)->create();
 
         Department::all()->each(function ($department) {
-            $leader = Employee::where('department_id', $department->id)->get()->random();
+            $leader = Employee::all()->random();
 
             $department->update([
                 'employee_id' => $leader->id
             ]);
 
-            Employee::where('department_id', $department->id)
-                ->where('id', '!=', $leader->id)
+            Employee::where('id', '!=', $leader->id)
                 ->limit(rand(2, 4))
                 ->inRandomOrder()
                 ->get()
@@ -35,8 +34,7 @@ class DatabaseSeeder extends Seeder
                         'supervisor_id' => $leader->id
                     ]);
 
-                    Employee::where('department_id', $department->id)
-                        ->where('id', '!=', $leader->id)
+                    Employee::where('id', '!=', $leader->id)
                         ->where('id', '!=', $supervisor->id)
                         ->limit(rand(0, 4))
                         ->inRandomOrder()
@@ -46,8 +44,7 @@ class DatabaseSeeder extends Seeder
                                 'supervisor_id' => $supervisor->id
                             ]);
 
-                            Employee::where('department_id', $department->id)
-                                ->where('id', '!=', $leader->id)
+                            Employee::where('id', '!=', $leader->id)
                                 ->where('id', '!=', $supervisor->id)
                                 ->where('id', '!=', $employee->id)
                                 ->limit(rand(0, 3))

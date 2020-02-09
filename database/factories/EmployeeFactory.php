@@ -9,7 +9,6 @@ $factory->define(Employee::class, function (Faker $faker) {
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
-        'title' => $faker->jobTitle,
-        'department_id' => \App\Department::all()->random()->id
+        'title' => $faker->jobTitle
     ];
 });
