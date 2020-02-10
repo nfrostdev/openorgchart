@@ -13,12 +13,12 @@ class Department extends Model
         return $this->hasOne('App\Employee', 'id', 'employee_id');
     }
 
-    private function recursiveEmployeeCheck($supervisor)
+    public static function recursiveEmployeeCheck($supervisor)
     {
         if ($supervisor) {
             // TODO: This is pretty sloppy. There should to be a better way.
             return $supervisor->team->map(function ($employee) {
-                return $this->recursiveEmployeeCheck($employee);
+                return self::recursiveEmployeeCheck($employee);
             })->push($supervisor)->flatten()->unique();
         } else {
             return $supervisor;
@@ -28,6 +28,6 @@ class Department extends Model
     // https://laravel.com/docs/master/eloquent-mutators#defining-an-accessor
     public function getEmployeesAttribute()
     {
-        return $this->recursiveEmployeeCheck($this->leader);
+        return self::recursiveEmployeeCheck($this->leader);
     }
 }

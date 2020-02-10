@@ -38,7 +38,20 @@
             @slot('type', 'select')
 
             <option value="">None</option>
-            @foreach($employees->where('id', '!=', $employee->id) as $supervisor)
+            @php
+                // Get a list of disallowed supervisors from this department.
+                $disallowed_supervisor_ids = \App\Department::recursiveEmployeeCheck($employee)->map(function($employee) {
+                    return $employee->id;
+                })->toArray();
+
+                // Filter the employees to see who is assignable.
+                $supervisors = $employees->map(function($supervisor) use($disallowed_supervisor_ids){
+                    return !in_array($supervisor->id, $disallowed_supervisor_ids) ? $supervisor : null;
+                })->reject(function($employee) {
+                    return $employee === null;
+                });
+            @endphp
+            @foreach($supervisors as $supervisor)
                 <option value="{{ $supervisor->id }}" {{ isset($employee->supervisor->id) && $employee->supervisor->id === $supervisor->id ? 'selected' : '' }}>
                     {{ $supervisor->first_name }} {{ $supervisor->last_name }}
                 </option>
