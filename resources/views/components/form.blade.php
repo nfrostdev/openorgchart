@@ -1,6 +1,6 @@
 <div class="columns is-centered">
     <div class="column is-one-quarter">
-        <form method="{{ strtoupper($method) === 'GET' ? 'GET' : 'POST'  }}" action="{{ $action }}" class="box" onsubmit="showSubmitButtonLoading()">
+        <form method="{{ strtoupper($method) === 'GET' ? 'GET' : 'POST'  }}" action="{{ $action }}" class="box" onsubmit="document.getElementById('submit-button').classList.add('is-loading')">
             @if(strtoupper($method) !== 'GET')
                 @csrf
                 @method($method)

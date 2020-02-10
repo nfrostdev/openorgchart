@@ -47,21 +47,8 @@
 
     @endcomponent
 
-    <form method="POST"
-          action="{{ route('employees.destroy', ['employee' => $employee->id]) }}"
-          onsubmit="confirmDeleteEmployee(event, '{{ $employee->first_name }} {{ $employee->last_name }}')"
-          class="section has-text-centered">
-        @csrf
-        @method('DELETE')
-        <button class="button card is-danger" title="Permanently Delete {{ $employee->first_name }} {{ $employee->last_name }}">Permanently Delete</button>
-    </form>
-
-    <script>
-        function confirmDeleteEmployee(event, employee) {
-            let confirmation = confirm("Are you sure you want to delete " + employee + "?\nThis action is permanent and cannot be undone!");
-            if (!confirmation) {
-                event.preventDefault();
-            }
-        }
-    </script>
+    @component('components.delete-button')
+        @slot('action', route('employees.destroy', ['employee' => $employee->id]))
+        @slot('resource_name', $employee->first_name . ' ' .$employee->last_name)
+    @endcomponent
 @endsection

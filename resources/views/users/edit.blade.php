@@ -53,26 +53,12 @@
                 @endforeach
             @endcomponent
         @endif
-
     @endcomponent
 
     @if($user->id !== 1 && $user->id !== Auth::user()->id)
-        <form method="POST"
-              action="{{ route('users.destroy', ['user' => $user->id]) }}"
-              onsubmit="confirmDeleteUser(event, '{{ $user->first_name }} {{ $user->last_name }}')"
-              class="section has-text-centered">
-            @csrf
-            @method('DELETE')
-            <button class="button card is-danger" title="Permanently Delete {{ $user->first_name }} {{ $user->last_name }}">Permanently Delete</button>
-        </form>
-
-        <script>
-            function confirmDeleteUser(event, user) {
-                let confirmation = confirm("Are you sure you want to delete " + user + "?\nThis action is permanent and cannot be undone!");
-                if (!confirmation) {
-                    event.preventDefault();
-                }
-            }
-        </script>
+        @component('components.delete-button')
+            @slot('action', route('users.destroy', ['user' => $user->id]))
+            @slot('resource_name', $user->first_name . ' ' . $user->last_name)
+        @endcomponent
     @endif
 @endsection

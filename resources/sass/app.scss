@@ -1,8 +1,60 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+* {
+    font-family: 'Public Sans', sans-serif;
+}
 
-// Variables
-@import 'variables';
+.employee {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+    &.supervisor {
+        width: 100%;
+        margin-top: 3rem;
+    }
+
+    .box {
+        margin: 1rem 0.5rem 0;
+    }
+
+    &-box {
+        &.supervisor {
+            transform: scale(1.125);
+        }
+
+        &.leader {
+            transform: scale(1.375);
+        }
+
+        &-name {
+            line-height: 100%;
+        }
+
+        &-title {
+            line-height: 100%;
+            margin-top: 0.25rem;
+        }
+
+        &-reports-to {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 0.375rem;
+            left: 0.25rem;
+            right: 0.75rem;
+            font-size: 0.5rem;
+
+            &-text {
+                margin-left: 0.125rem;
+            }
+        }
+    }
+}
+
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}

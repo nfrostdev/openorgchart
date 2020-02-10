@@ -31,22 +31,8 @@
         @endcomponent
     @endcomponent
 
-    {{-- TODO: Permanently Delete buttons should be abstracted. --}}
-    <form method="POST"
-          action="{{ route('departments.destroy', ['department' => $department->id]) }}"
-          onsubmit="confirmDeleteDepartment(event, '{{ $department->name }}')"
-          class="section has-text-centered">
-        @csrf
-        @method('DELETE')
-        <button class="button card is-danger" title="Permanently Delete {{ $department->name }} Department">Permanently Delete</button>
-    </form>
-
-    <script>
-        function confirmDeleteDepartment(event, department) {
-            let confirmation = confirm("Are you sure you want to delete " + department + "?\nDeleting this department will delete all teams and employees in it!\nThis action is permanent and cannot be undone!");
-            if (!confirmation) {
-                event.preventDefault();
-            }
-        }
-    </script>
+    @component('components.delete-button')
+        @slot('action', route('departments.destroy', ['department' => $department->id]))
+        @slot('resource_name', $department->name)
+    @endcomponent
 @endsection
