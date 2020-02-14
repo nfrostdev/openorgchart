@@ -18,6 +18,8 @@
     }
 
     &-box {
+        position: relative;
+
         &.supervisor {
             transform: scale(1.125);
         }
