@@ -20,12 +20,12 @@
     &-box {
         position: relative;
 
-        &.supervisor {
-            transform: scale(1.125);
-        }
-
         &.leader {
             transform: scale(1.375);
+        }
+
+        &.supervisor {
+            transform: scale(1.125);
         }
 
         &-name {
@@ -59,4 +59,5 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+    margin-bottom: 1.5rem;
 }
