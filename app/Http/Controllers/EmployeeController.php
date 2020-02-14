@@ -86,17 +86,32 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        $request->validate([
+        $data = $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'title' => 'required|string',
             'supervisor_id' => 'nullable|exists:employees,id'
         ]);
-        // TODO: Make sure user isn't assigned to be their own manager.
 
-        $employee->update($request->all());
+        // Get a list of disallowed supervisors from this department.
+        $disallowed_supervisor_ids = \App\Department::recursiveEmployeeCheck($employee)->map(function ($employee) {
+            return $employee->id;
+        })->toArray();
 
-        return redirect()->route('employees.index');
+        // Filter the employees to see who is assignable.
+        $supervisors = Employee::all()->map(function ($supervisor) use ($disallowed_supervisor_ids) {
+            return !in_array($supervisor->id, $disallowed_supervisor_ids) ? $supervisor : null;
+        })->reject(function ($employee) {
+            return $employee === null;
+        });
+
+        // If the supervisor selection is in the list of allowable supervisors, proceed.
+        if ($supervisors->contains('id', $data['supervisor_id'])) {
+            $employee->update($data);
+            return redirect()->route('employees.index');
+        }
+
+        return redirect()->back()->withErrors(['supervisor_id' => 'That supervisor selection is invalid for this employee.']);
     }
 
     /**
