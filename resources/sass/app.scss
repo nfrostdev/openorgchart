@@ -2,6 +2,10 @@
     font-family: 'Public Sans', sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .employee {
     display: flex;
     flex-direction: column;
@@ -19,6 +23,10 @@
 
     &-box {
         position: relative;
+
+        &:focus {
+            box-shadow: 0 0 0.5rem 0 red;
+        }
 
         &.leader {
             transform: scale(1.375);
