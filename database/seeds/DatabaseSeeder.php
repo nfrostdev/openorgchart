@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(User::class, rand(1, 19))->create();
-        factory(Department::class, rand(5, 20))->create();
+        factory(Department::class, rand(4, 8))->create();
         factory(Employee::class, 1000)->create();
 
         Department::all()->each(function ($department) {
