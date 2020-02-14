@@ -23,8 +23,7 @@
 
             <option value="">None</option>
             @foreach($employees as $leader)
-                {{-- TODO: selected --}}
-                <option value="{{ $leader->id }}">
+                <option value="{{ $leader->id }}" {{ $department->leader && $department->leader->id === $leader->id ? 'selected' : '' }}>
                     {{ $leader->first_name }} {{ $leader->last_name }}
                 </option>
             @endforeach
