@@ -12,15 +12,16 @@ class RoleCheck
      *
      * @param Request $request
      * @param Closure $next
-     * @param string $role
+     * @param array $roles
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, ...$roles)
     {
-        if (!$request->user()->hasRole($role)) {
-            abort(403);
+        foreach ($roles as $role) {
+            if ($request->user()->hasRole($role)) {
+                return $next($request);
+            }
         }
-
-        return $next($request);
+        return abort(403);
     }
 }

@@ -39,7 +39,7 @@
             @slot('required', false)
         @endcomponent
 
-        @if($user->id !== 1)
+        @if($user->id !== 1 && Auth::user()->hasRole('Administrator'))
             @component('components.input')
                 @slot('id', 'role_id')
                 @slot('label', 'Role')
