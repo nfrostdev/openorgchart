@@ -24,8 +24,10 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('role:Administrator')->group(function () {
-        Route::resource('users', 'UserController');
+        Route::resource('users', 'UserController')->except('edit', 'update');
     });
+
+    Route::resource('users', 'UserController')->only('edit', 'update');
 });
 
 Route::get('/', 'HomeController@index')->name('index');

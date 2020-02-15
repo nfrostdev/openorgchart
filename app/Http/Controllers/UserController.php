@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\User;
+use http\Env\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,10 +76,16 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param User $user
-     * @return View
+     * @return View|void
      */
     public function edit(User $user)
     {
+        $user_is_administrator = Auth::user()->hasRole('Administrator');
+
+        if ($user->id !== Auth::user()->id && !$user_is_administrator) {
+            return abort(403);
+        }
+
         return view('users.edit', [
             'user' => $user,
             'roles' => Role::orderByDesc('id')->get()
@@ -90,10 +97,15 @@ class UserController extends Controller
      *
      * @param Request $request
      * @param User $user
-     * @return RedirectResponse
+     * @return RedirectResponse|void
      */
     public function update(Request $request, User $user)
     {
+        $user_is_administrator = Auth::user()->hasRole('Administrator');
+        if ($user->id !== Auth::user()->id && !$user_is_administrator) {
+            return abort(403);
+        }
+
         $data = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -106,8 +118,9 @@ class UserController extends Controller
             'last_name' => $data['last_name']
         ]);
 
-        // The default administrator cannot have a role change.
-        if ($user->id !== 1 && isset($data['role_id'])) {
+        // The default administrator cannot have a role change via this interface.
+        // A user that isn't an admin cannot change their own role.
+        if ($user_is_administrator && $user->id !== 1 && isset($data['role_id'])) {
             $user->update(['role_id' => $data['role_id']]);
         }
 
