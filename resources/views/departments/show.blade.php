@@ -15,9 +15,17 @@
         @endcomponent
     </div>
 
-    <style>
-        .department {
-            max-width: 100vw;
+    <script>
+        function highlightSupervisor(id) {
+            const supervisor = document.getElementById(id).querySelector('.employee-box');
+            let timeoutCount = 0;
+
+            for (let i = 0; i < 4; i++) {
+                timeoutCount += 300;
+                setTimeout(function () {
+                    supervisor.classList.toggle('highlighted');
+                }, timeoutCount);
+            }
         }
-    </style>
+    </script>
 @endsection

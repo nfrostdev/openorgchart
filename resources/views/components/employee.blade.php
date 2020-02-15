@@ -9,6 +9,7 @@
                 </div>
             @else
                 <a href="#{{ $employee->supervisor->id }}_{{ $employee->supervisor->first_name }}_{{ $employee->supervisor->last_name }}"
+                   onclick="highlightSupervisor('{{ $employee->supervisor->id }}_{{ $employee->supervisor->first_name }}_{{ $employee->supervisor->last_name }}')"
                    class="employee-box-reports-to has-text-gray-light" title="Reports to {{ $employee->supervisor->first_name }} {{ $employee->supervisor->last_name }}">
                     <span class="fas fa-arrow-up"></span>
                     <span class="employee-box-reports-to-text">{{ $employee->supervisor->first_name }} {{ $employee->supervisor->last_name }}</span>
