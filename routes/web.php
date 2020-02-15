@@ -21,9 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:Administrator')->group(function () {
         Route::resource('users', 'UserController');
     });
-    Route::resource('departments', 'DepartmentController')->except('index', 'show');
+    Route::resource('departments', 'DepartmentController')->except('show');
     Route::resource('employees', 'EmployeeController');
 });
 
 Route::get('/', 'HomeController@index')->name('index');
-Route::resource('departments', 'DepartmentController')->only(['index', 'show']);
+Route::resource('departments', 'DepartmentController')->only(['show']);

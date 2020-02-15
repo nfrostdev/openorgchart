@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function dashboard()
+
+    public function __construct()
     {
-        return view('dashboard');
+        if (env('AUTHENTICATION_REQUIRED')) {
+            $this->middleware('auth', ['only' => 'index']);
+        }
     }
 
     /**

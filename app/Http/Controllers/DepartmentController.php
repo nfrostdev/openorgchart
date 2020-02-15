@@ -11,6 +11,13 @@ use Illuminate\View\View;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        if (env('AUTHENTICATION_REQUIRED')) {
+            $this->middleware('auth', ['only' => 'show']);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
