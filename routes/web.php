@@ -18,11 +18,14 @@ Auth::routes([
 ]);
 
 Route::middleware('auth')->group(function () {
+    Route::middleware('role:Administrator', 'role:Editor')->group(function () {
+        Route::resource('departments', 'DepartmentController')->except('show');
+        Route::resource('employees', 'EmployeeController');
+    });
+
     Route::middleware('role:Administrator')->group(function () {
         Route::resource('users', 'UserController');
     });
-    Route::resource('departments', 'DepartmentController')->except('show');
-    Route::resource('employees', 'EmployeeController');
 });
 
 Route::get('/', 'HomeController@index')->name('index');

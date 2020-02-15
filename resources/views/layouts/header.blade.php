@@ -19,17 +19,19 @@
                             <a class="navbar-item" href="{{ route('register') }}">{{ __('Register') }}</a>
                         @endif
                     @else
-                        @component('components.navbar-item')
-                            @slot('route', 'departments.index')
-                            @slot('icon', 'sitemap')
-                            @slot('text', 'Departments')
-                        @endcomponent
+                        @if(Auth::user()->hasRole('Administrator') || Auth::user()->hasRole('Editor'))
+                            @component('components.navbar-item')
+                                @slot('route', 'departments.index')
+                                @slot('icon', 'sitemap')
+                                @slot('text', 'Departments')
+                            @endcomponent
 
-                        @component('components.navbar-item')
-                            @slot('route', 'employees.index')
-                            @slot('icon', 'users')
-                            @slot('text', 'Employees')
-                        @endcomponent
+                            @component('components.navbar-item')
+                                @slot('route', 'employees.index')
+                                @slot('icon', 'users')
+                                @slot('text', 'Employees')
+                            @endcomponent
+                        @endif
 
                         @if(Auth::user()->hasRole('Administrator'))
                             @component('components.navbar-item')

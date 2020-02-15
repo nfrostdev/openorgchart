@@ -24,7 +24,7 @@ class CreateRolesTable extends Migration
 
         $administrator = Role::create(['name' => 'Administrator']);
         Role::create(['name' => 'Editor']);
-        User::find(1)->update(['role_id' => $administrator->id]);
+//        User::find(1)->update(['role_id' => 2]);
     }
 
     /**
