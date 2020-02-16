@@ -1,4 +1,4 @@
-name: Continuous Integration for Laravel 6
+name: CI
 on: [push]
 jobs:
   laravel-tests:
