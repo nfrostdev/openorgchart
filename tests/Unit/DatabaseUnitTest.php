@@ -13,7 +13,7 @@ class DatabaseUnitTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function unitTest(string $class, string $table, array $create, array $update)
+    private function databaseUnitTest(string $class, string $table, array $create, array $update)
     {
         $model = factory($class)->create($create);
         $this->assertDatabaseHas($table, $create);
@@ -22,12 +22,13 @@ class DatabaseUnitTest extends TestCase
         $this->assertDatabaseHas($table, $update);
 
         $model->delete();
+        $this->assertDeleted($model);
         $this->assertDatabaseMissing($table, $update);
     }
 
     public function testUserUnit()
     {
-        $this->unitTest(
+        $this->databaseUnitTest(
             User::class,
             'users',
             ['first_name' => 'DatabaseTest'],
@@ -37,7 +38,7 @@ class DatabaseUnitTest extends TestCase
 
     public function testRoleUnit()
     {
-        $this->unitTest(
+        $this->databaseUnitTest(
             Role::class,
             'roles',
             ['name' => 'DatabaseTest'],
@@ -47,7 +48,7 @@ class DatabaseUnitTest extends TestCase
 
     public function testDepartmentUnit()
     {
-        $this->unitTest(
+        $this->databaseUnitTest(
             Department::class,
             'departments',
             ['name' => 'DatabaseTest'],
@@ -57,7 +58,7 @@ class DatabaseUnitTest extends TestCase
 
     public function testEmployeeUnit()
     {
-        $this->unitTest(
+        $this->databaseUnitTest(
             Employee::class,
             'employees',
             ['first_name' => 'DatabaseTest'],

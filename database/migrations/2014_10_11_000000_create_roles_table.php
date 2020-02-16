@@ -3,8 +3,10 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\User;
+use App\Role;
 
-class CreateEmployeesTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +15,16 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('title');
-            $table->unsignedBigInteger('supervisor_id')->nullable();
+        Schema::create('roles', function (Blueprint $table) {
+            $table->tinyIncrements('id');
+            $table->string('name');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });
+
+        // Create the default roles.
+        Role::create(['name' => 'Administrator']);
+        Role::create(['name' => 'Editor']);
     }
 
     /**
@@ -31,6 +34,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('roles');
     }
 }

@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->unsignedTinyInteger('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->rememberToken();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
@@ -33,6 +34,7 @@ class CreateUsersTable extends Migration
             'last_name' => 'Administrator',
             'email' => 'admin@example.com',
             'password' => Hash::make('openorgchart'),
+            'role_id' => \App\Role::where('name', 'Administrator')->first()->id
         ]);
     }
 
