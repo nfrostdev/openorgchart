@@ -16,7 +16,7 @@
             @foreach($departments as $department)
                 <tr>
                     <td>{{ $department->id }}</td>
-                    <td><a href="{{ route('departments.edit', ['department' => $department->id]) }}" title="Edit {{ $department->name }} Department">{{ $department->name }}</a></td>
+                    <td><a href="{{ route('departments.edit', ['department' => $department]) }}" title="Edit {{ $department->name }} Department">{{ $department->name }}</a></td>
                     <td>{{ $department->leader->first_name ?? 'N/A' }} {{ $department->leader->last_name ?? '' }}</td>
                     <td>{{ $department->employees ? $department->employees->count() : 'N/A' }}</td>
                     <td>{{ $department->updated_at }}</td>

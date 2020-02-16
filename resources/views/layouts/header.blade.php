@@ -62,7 +62,7 @@
                     <span class="icon">
                         <span class="fas fa-user-circle"></span>
                     </span>
-                    <a href="{{ route('users.edit', ['user' => Auth::user()->id]) }}" class="is-link">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
+                    <a href="{{ route('users.edit', ['user' => Auth::user()]) }}" class="is-link">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@
             @foreach($employees as $employee)
                 <tr>
                     <td>{{ $employee->id }}</td>
-                    <td><a href="{{ route('employees.edit', ['employee' => $employee->id]) }}">{{ $employee->first_name }} {{ $employee->last_name }}</a></td>
+                    <td><a href="{{ route('employees.edit', ['employee' => $employee]) }}">{{ $employee->first_name }} {{ $employee->last_name }}</a></td>
                     <td>{{ $employee->title }}</td>
                     <td>{{ $employee->department->name ?? 'N/A' }}</td>
                     <td>{{ $employee->supervisor->first_name ?? 'N/A' }} {{ $employee->supervisor->last_name ?? '' }}</td>

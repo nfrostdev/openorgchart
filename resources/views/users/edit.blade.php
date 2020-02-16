@@ -5,7 +5,7 @@
 @section('content')
     @component('components.form')
         @slot('method', 'PATCH')
-        @slot('action', route('users.update', ['user' => $user->id]))
+        @slot('action', route('users.update', ['user' => $user]))
         @slot('submit_text', 'Save')
 
         @component('components.input')
@@ -57,7 +57,7 @@
 
     @if($user->id !== 1 && $user->id !== Auth::user()->id)
         @component('components.delete-button')
-            @slot('action', route('users.destroy', ['user' => $user->id]))
+            @slot('action', route('users.destroy', ['user' => $user]))
             @slot('resource_name', $user->first_name . ' ' . $user->last_name)
         @endcomponent
     @endif

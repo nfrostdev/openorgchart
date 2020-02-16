@@ -5,7 +5,7 @@
 @section('content')
     @component('components.form')
         @slot('method', 'PATCH')
-        @slot('action', route('departments.update', ['department' => $department->id]))
+        @slot('action', route('departments.update', ['department' => $department]))
         @slot('submit_text', 'Save')
 
         @component('components.input')
@@ -31,7 +31,7 @@
     @endcomponent
 
     @component('components.delete-button')
-        @slot('action', route('departments.destroy', ['department' => $department->id]))
+        @slot('action', route('departments.destroy', ['department' => $department]))
         @slot('resource_name', $department->name)
     @endcomponent
 @endsection
