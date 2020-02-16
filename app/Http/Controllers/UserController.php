@@ -47,16 +47,19 @@ class UserController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'role_id' => 'exists:roles,id'
+            'role_id' => 'sometimes|nullable|exists:roles,id'
         ]);
 
-        User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role_id' => $data['role_id']
+            'password' => Hash::make($data['password'])
         ]);
+
+        if (isset($data['role_id'])) {
+            $user->update(['role_id' => $data['role_id']]);
+        }
 
         return redirect()->route('users.index');
     }
@@ -120,7 +123,7 @@ class UserController extends Controller
 
         // The default administrator cannot have a role change via this interface.
         // A user that isn't an admin cannot change their own role.
-        if ($user_is_administrator && $user->id !== 1 && isset($data['role_id'])) {
+        if (isset($data['role_id']) && $user_is_administrator && $user->id !== 1) {
             $user->update(['role_id' => $data['role_id']]);
         }
 
@@ -136,7 +139,11 @@ class UserController extends Controller
             $user->update(['password' => Hash::make($data['password'])]);
         }
 
-        return redirect()->route('users.index');
+        if ($user_is_administrator) {
+            return redirect()->route('users.index');
+        }
+
+        return redirect()->route('index');
     }
 
     /**
