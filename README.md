@@ -1,5 +1,5 @@
 # Open Org Chart
-![Continuous Integration for Laravel 6](https://github.com/nfrostdev/openorgchart/workflows/Continuous%20Integration%20for%20Laravel%206/badge.svg?branch=master)
+![CI](https://github.com/nfrostdev/openorgchart/workflows/CI/badge.svg?branch=master)
 
 **This project is still in alpha and has no official release candidates yet.**
 
