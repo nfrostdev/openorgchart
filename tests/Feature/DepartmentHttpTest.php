@@ -2,20 +2,21 @@
 
 namespace Tests\Feature;
 
+use App\Department;
 use App\Employee;
 use App\Role;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class EmployeeHttpTest extends TestCase
+class DepartmentHttpTest extends TestCase
 {
     use RefreshDatabase;
 
     private $user;
     private $editor;
     private $administrator;
-    private $employee;
+    private $department;
 
     public function setUp(): void
     {
@@ -23,12 +24,14 @@ class EmployeeHttpTest extends TestCase
         $this->user = factory(User::class)->create(['role_id' => null]);
         $this->editor = factory(User::class)->create(['role_id' => Role::where('name', 'Editor')->first()->id]);
         $this->administrator = factory(User::class)->create(['role_id' => Role::where('name', 'Administrator')->first()->id]);
-        $this->employee = factory(Employee::class)->create();
+        $this->department = factory(Department::class)->create();
+        // Seed some employees for random selection.
+        factory(Employee::class, 5)->create();
     }
 
     function testIndex()
     {
-        $route = route('employees.index');
+        $route = route('departments.index');
         $this->get($route)->assertRedirect();
         $this->actingAs($this->user)->get($route)->assertForbidden();
         $this->actingAs($this->editor)->get($route)->assertSuccessful();
@@ -37,7 +40,7 @@ class EmployeeHttpTest extends TestCase
 
     function testCreate()
     {
-        $route = route('employees.create');
+        $route = route('departments.create');
         $this->get($route)->assertRedirect();
         $this->actingAs($this->user)->get($route)->assertForbidden();
         $this->actingAs($this->editor)->get($route)->assertSuccessful();
@@ -46,12 +49,10 @@ class EmployeeHttpTest extends TestCase
 
     function testStore()
     {
-        $route = route('employees.store');
+        $route = route('departments.store');
         $post_data = [
-            'first_name' => 'testStore',
-            'last_name' => 'testStore',
-            'title' => 'testStore',
-            'supervisor_id' => Employee::all()->random()->id
+            'name' => 'testStore',
+            'employee_id' => Employee::all()->random()->id
         ];
         $this->post($route, $post_data)->assertRedirect();
         $this->actingAs($this->user)->post($route, $post_data)->assertForbidden();
@@ -61,7 +62,7 @@ class EmployeeHttpTest extends TestCase
 
     function testEdit()
     {
-        $route = route('employees.edit', ['employee' => $this->employee]);
+        $route = route('departments.edit', ['department' => $this->department]);
         $this->get($route)->assertRedirect();
         $this->actingAs($this->user)->get($route)->assertForbidden();
         $this->actingAs($this->editor)->get($route)->assertSuccessful();
@@ -70,13 +71,11 @@ class EmployeeHttpTest extends TestCase
 
     function testUpdate()
     {
-        $route = route('employees.update', ['employee' => $this->employee]);
+        $route = route('departments.update', ['department' => $this->department]);
 
         $patch_data = [
-            'first_name' => 'testUpdate',
-            'last_name' => 'testUpdate',
-            'title' => 'testUpdate',
-            'supervisor_id' => Employee::all()->random()->id
+            'name' => 'testUpdate',
+            'employee_id' => Employee::all()->random()->id
         ];
 
         $this->patch($route, $patch_data)->assertRedirect();
@@ -86,10 +85,8 @@ class EmployeeHttpTest extends TestCase
 
         // TODO: This should probably be more complex. The route controller has unannounced restrictions?
         $bad_patch_data = [
-            'first_name' => '',
-            'last_name' => '',
-            'title' => '',
-            'supervisor_id' => 99999999999999
+            'name' => '',
+            'employee_id' => 9999999999999
         ];
 
         $this->patch($route, $bad_patch_data)->assertRedirect();
@@ -100,13 +97,13 @@ class EmployeeHttpTest extends TestCase
 
     public function testDestroy()
     {
-        $route = route('employees.destroy', ['employee' => $this->employee]);
+        $route = route('departments.destroy', ['department' => $this->department]);
         $this->delete($route)->assertRedirect();
         $this->actingAs($this->user)->delete($route)->assertForbidden();
         $this->actingAs($this->editor)->delete($route)->assertRedirect();
 
-        $scoped_employee = factory(Employee::class)->create();
-        $scoped_employee_route = route('employees.destroy', ['employee' => $scoped_employee]);
-        $this->actingAs($this->administrator)->delete($scoped_employee_route)->assertRedirect();
+        $scoped_department = factory(Department::class)->create();
+        $scoped_department_route = route('departments.destroy', ['department' => $scoped_department]);
+        $this->actingAs($this->administrator)->delete($scoped_department_route)->assertRedirect();
     }
 }

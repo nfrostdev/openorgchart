@@ -66,9 +66,9 @@ class UserHttpTest extends TestCase
 
     function testEdit()
     {
-        $administrator_route = route('users.edit', ['user' => $this->administrator->id]);
-        $editor_route = route('users.edit', ['user' => $this->editor->id]);
-        $user_route = route('users.edit', ['user' => $this->user->id]);
+        $administrator_route = route('users.edit', ['user' => $this->administrator]);
+        $editor_route = route('users.edit', ['user' => $this->editor]);
+        $user_route = route('users.edit', ['user' => $this->user]);
 
         $this->get($administrator_route)->assertRedirect();
         $this->get($editor_route)->assertRedirect();
@@ -89,9 +89,9 @@ class UserHttpTest extends TestCase
 
     function testUpdate()
     {
-        $administrator_route = route('users.update', ['user' => $this->administrator->id]);
-        $editor_route = route('users.update', ['user' => $this->editor->id]);
-        $user_route = route('users.update', ['user' => $this->user->id]);
+        $administrator_route = route('users.update', ['user' => $this->administrator]);
+        $editor_route = route('users.update', ['user' => $this->editor]);
+        $user_route = route('users.update', ['user' => $this->user]);
 
         $patch_data = [
             'first_name' => 'testUpdate',
@@ -144,9 +144,9 @@ class UserHttpTest extends TestCase
 
     public function testDestroy()
     {
-        $administrator_route = route('users.destroy', ['user' => $this->administrator->id]);
-        $editor_route = route('users.destroy', ['user' => $this->editor->id]);
-        $user_route = route('users.destroy', ['user' => $this->user->id]);
+        $administrator_route = route('users.destroy', ['user' => $this->administrator]);
+        $editor_route = route('users.destroy', ['user' => $this->editor]);
+        $user_route = route('users.destroy', ['user' => $this->user]);
 
         $this->delete($administrator_route)->assertRedirect();
         $this->delete($editor_route)->assertRedirect();
