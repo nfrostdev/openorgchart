@@ -2,7 +2,10 @@
     <nav class="navbar is-dark card" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                <a class="navbar-item" href="{{ url('/') }}">
+                    <img alt="Open Org Chart Logo" src="{{ asset('images/vector/OOC_Logo_White.svg') }}" class="navbar-logo">
+                    <span>{{ config('app.name', 'Laravel') }}</span>
+                </a>
                 <a role="button" id="primary-burger" class="navbar-burger" aria-label="menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>

@@ -6,6 +6,16 @@ html {
     scroll-behavior: smooth;
 }
 
+.navbar-brand {
+    white-space: nowrap;
+}
+
+.navbar-logo {
+    margin-right: 0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 // TODO: Cleanup unused CSS classes.
 .employee {
     display: flex;
