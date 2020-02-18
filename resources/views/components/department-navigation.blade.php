@@ -1,7 +1,7 @@
 @if($departments->count() > 0)
     <div class="content has-text-centered">
         <label for="choose-department" class="sr-only">Department Selection</label>
-        <div class="select card">
+        <div class="select">
             <select id="choose-department" oninput="navigateToDepartmentSelection()">
                 <option value="">Select a Department</option>
                 @foreach($departments as $department)
