@@ -18,3 +18,4 @@ RUN docker-php-ext-install pdo_mysql && a2enmod rewrite \
   && chown -R root:www-data storage/ && chown -R root:www-data bootstrap/cache/ \
   && chmod -R 775 storage/ && chmod -R 775 bootstrap/cache/
 EXPOSE 80
+ENTRYPOINT ["entrypoint.sh"]
