@@ -14,12 +14,12 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('title');
             // TODO: This may be easier to deal with, for complex comparisons, as a relational table.
-            $table->unsignedBigInteger('supervisor_id')->nullable();
+            $table->unsignedInteger('supervisor_id')->nullable();
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });

@@ -14,10 +14,10 @@ class CreateDepartmentsTable extends Migration
     public function up()
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
             // TODO: Make this leader or leader_id to be in proper namespace.
-            $table->unsignedBigInteger('employee_id')->nullable();
+            $table->unsignedInteger('employee_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
