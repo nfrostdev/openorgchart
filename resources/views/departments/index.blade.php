@@ -10,6 +10,9 @@
         @slot('text', 'New Department')
     @endcomponent
 
+    @component('components.filter-form')
+    @endcomponent
+
     @if($departments->count() > 0)
         @component('components.table')
             @slot('headers', ['ID', 'Name', 'Leader', 'Employees', 'Last Updated'])
@@ -24,5 +27,7 @@
             @endforeach
         @endcomponent
         {{ $departments->links() }}
+    @else
+        <p class="content has-text-centered">No Departments were found.</p>
     @endif
 @endsection

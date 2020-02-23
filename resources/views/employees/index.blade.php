@@ -26,5 +26,7 @@
             @endforeach
         @endcomponent
         {{ $employees->links() }}
+    @else
+        <p class="content has-text-centered">No Employees were found.</p>
     @endif
 @endsection

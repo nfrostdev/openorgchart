@@ -21,11 +21,20 @@ class DepartmentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('departments.index', ['departments' => Department::paginate(10)]);
+        $departments = Department::orderBy('name');
+
+        $filter = $request->input('filter');
+
+        if ($filter) {
+            $departments = $departments->where('name', 'like', '%' . $filter . '%');
+        }
+
+        return view('departments.index', ['departments' => $departments->paginate(10)]);
     }
 
     /**

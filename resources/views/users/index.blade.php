@@ -23,5 +23,7 @@
             @endforeach
         @endcomponent
         {{ $users->links() }}
+    @else
+        <p class="content has-text-centered">No Users were found.</p>
     @endif
 @endsection
