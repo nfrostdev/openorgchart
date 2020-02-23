@@ -3,11 +3,20 @@
 @section('title', 'Users')
 
 @section('content')
-    <p class="content has-text-centered">Administrators can manage other users and content. Editors can only manage content.</p>
+    <p class="content has-text-centered">
+        Users can see site content when authentication is required.
+        <br/>
+        Administrators can manage other users and content. Editors can only manage content.
+    </p>
+
     @component('components.create-button')
         @slot('route', route('users.create'))
         @slot('text', 'New User')
     @endcomponent
+
+    @component('components.filter-form')
+    @endcomponent
+
     @if($users->count())
         @component('components.table')
             @slot('headers', ['ID', 'Name', 'E-mail', 'Role', 'Created', 'Last Updated'])
@@ -22,7 +31,7 @@
                 </tr>
             @endforeach
         @endcomponent
-        {{ $users->links() }}
+        {{ $users->appends(['filter' => request()->input('filter')])->links() }}
     @else
         <p class="content has-text-centered">No Users were found.</p>
     @endif

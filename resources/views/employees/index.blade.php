@@ -10,6 +10,9 @@
         @slot('text', 'New Employee')
     @endcomponent
 
+    @component('components.filter-form')
+    @endcomponent
+
     @if($employees->count())
         @component('components.table')
             @slot('headers', ['ID', 'Name', 'Title', 'Department', 'Supervisor', 'Manages', 'Last Modified'])
@@ -25,7 +28,7 @@
                 </tr>
             @endforeach
         @endcomponent
-        {{ $employees->links() }}
+        {{ $employees->appends(['filter' => request()->input('filter')])->links() }}
     @else
         <p class="content has-text-centered">No Employees were found.</p>
     @endif

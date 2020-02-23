@@ -26,7 +26,7 @@
                 </tr>
             @endforeach
         @endcomponent
-        {{ $departments->links() }}
+        {{ $departments->appends(['filter' => request()->input('filter')])->links() }}
     @else
         <p class="content has-text-centered">No Departments were found.</p>
     @endif

@@ -13,11 +13,22 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('employees.index', ['employees' => Employee::paginate(10)]);
+        $employees = Employee::orderBy('last_name');
+
+        $filter = $request->input('filter');
+
+        if ($filter) {
+            $employees = $employees->where('first_name', 'like', '%' . $filter . '%')
+                ->orWhere('last_name', 'like', '%' . $filter . '%')
+                ->orWhere('title', 'like', '%' . $filter . '%');
+        }
+
+        return view('employees.index', ['employees' => $employees->paginate(10)]);
     }
 
     /**

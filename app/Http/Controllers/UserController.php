@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\User;
-use http\Env\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,11 +16,22 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return View
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('users.index', ['users' => User::paginate(10)]);
+        $users = User::orderBy('last_name');
+
+        $filter = $request->input('filter');
+
+        if ($filter) {
+            $users = $users->where('first_name', 'like', '%' . $filter . '%')
+                ->orWhere('last_name', 'like', '%' . $filter . '%')
+                ->orWhere('email', 'like', '%' . $filter . '%');
+        }
+
+        return view('users.index', ['users' => $users->paginate(10)]);
     }
 
     /**
