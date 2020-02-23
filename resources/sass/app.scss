@@ -87,11 +87,13 @@ html {
 }
 
 .navbar.is-dark a.navbar-item:hover,
+.navbar.is-dark a.navbar-item:focus,
 .navbar.is-dark a.navbar-item.is-active {
     background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
 .navbar.is-light a.navbar-item:hover,
+.navbar.is-light a.navbar-item:focus,
 .navbar.is-light a.navbar-item.is-active {
     background-color: rgba(0, 0, 0, 0.1) !important;
 }
