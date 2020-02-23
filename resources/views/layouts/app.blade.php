@@ -19,7 +19,7 @@
 </head>
 <body>
 
-@include('layouts.header')
+@include('includes.header')
 
 <main class="section">
     <div class="container">

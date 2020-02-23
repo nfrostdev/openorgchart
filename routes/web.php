@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:Administrator')->group(function () {
         // Only Administrators can manage other users.
         Route::resource('users', 'UserController')->except('edit', 'update');
+        Route::get('settings', 'SiteSettingController@index')->name('settings.index');
+        Route::patch('settings', 'SiteSettingController@update')->name('settings.update');
     });
 
     // Users can always edit their own information to a varying degree.
