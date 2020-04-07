@@ -1,6 +1,19 @@
+# https://www.cloudbooklet.com/deploy-laravel-on-google-app-engine-standard/
 runtime: php73
+handlers:
+  - url: /css
+    static_dir: public/css
+  - url: /images
+    static_dir: public/images
+  - url: /js
+    static_dir: public/js
 env_variables:
+  APP_ENV: production
+  APP_NAME: "Open Org Chart"
   APP_KEY:
+  APP_URL:
+  ASSET_URL:
+  AUTHENTICATION_REQUIRED: false
   APP_STORAGE: /tmp
   VIEW_COMPILED_PATH: /tmp
   CACHE_DRIVER: database
