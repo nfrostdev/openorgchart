@@ -1,18 +1,22 @@
 name: CI
-on: [push]
+on: [ push ]
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Copy Environment Laravel Configuration
-      run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
-    - name: Install Composer Dependencies
-      run: composer install
-    - name: Create SQLite Database and Migrate
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
-        php artisan migrate
-    - name: Execute PHPUnit Tests
-      run: vendor/bin/phpunit
+      - name: Setup PHP with PECL extension
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+      - uses: actions/checkout@v1
+      - name: Copy Environment Laravel Configuration
+        run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+      - name: Install Composer Dependencies
+        run: composer install
+      - name: Create SQLite Database and Migrate
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+          php artisan migrate
+      - name: Execute PHPUnit Tests
+        run: vendor/bin/phpunit
