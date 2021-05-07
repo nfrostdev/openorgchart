@@ -25,6 +25,8 @@
         "vue-template-compiler": "^2.6.12"
     },
     "resolutions": {
-        "ssri": "8.0.1"
+        "ssri": "8.0.1",
+        "node-notifier": ">=8.0.1",
+        "is-svg": ">=4.2.2"
     }
 }
