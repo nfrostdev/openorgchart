@@ -28,6 +28,7 @@
         "ssri": "8.0.1",
         "node-notifier": ">=8.0.1",
         "is-svg": ">=4.2.2",
-        "normalize-url": ">=4.5.1"
+        "normalize-url": ">=4.5.1",
+        "glob-parent": ">=5.1.2"
     }
 }
